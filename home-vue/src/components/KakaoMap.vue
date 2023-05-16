@@ -26,7 +26,7 @@ export default {
     methods: {
         loadScript() {
             const script = document.createElement("script");
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=74f1e792cc4d7d72169a67ae909e2b50&libraries=services,clusterer,drawing"
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=74f1e792cc4d7d72169a67ae909e2b50&libraries=services,clusterer,drawing"
             script.onload = () => window.kakao.maps.load(this.loadMap);
             document.head.appendChild(script);
         },
