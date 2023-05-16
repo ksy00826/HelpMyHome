@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.home.model.mapper.AptMapper">
+
+	<select id="selectDongCode" resultType="dongCodeDto">
+		select dongCode, sidoName, gugunName, dongName
+		from dongcode
+	</select>
+	
+	<select id="getHomeList" parameterType="homeInfoDto" resultType="homeResultDto">
+		select hi.apartmentName, hd.floor, hd.area, dc.dongName, hd.dealamount, hi.roadName
+		from dongcode dc
+		join houseinfo hi on dc.dongCode = hi.dongCode
+		join housedeal hd on hi.aptCode = hd.aptCode
+		where dc.sidoName = #{sidoName}
+		and dc.gugunName = #{gugunName}
+		and dc.dongName = #{dongName}
+		and hd.dealYear = #{year}
+		and hd.dealMonth = #{month}
+	</select>
+	
+	<delete id="removeApt" parameterType="homeResultDto">
+		delete from housedeal hd
+		where hd.floor = #{floor}
+		and hd.area = #{area}
+		and hd.dealAmount = #{dealAmount}
+	</delete>
+	
+	<!-- 관심 지역 정보 -->
+	
+	<insert id="registInterest" parameterType="interestAreaDto">
+		INSERT INTO interestArea (userId, dongCode, area)
+		values (#{userId}, #{dongCode}, #{area})
+	</insert>
+	
+	<select id="getInterestList" parameterType="String" resultType="interestAreaDto">
+		SELECT idx, dongCode, area
+		FROM interestArea
+		WHERE userId = #{userId}
+	</select>
+</mapper>
