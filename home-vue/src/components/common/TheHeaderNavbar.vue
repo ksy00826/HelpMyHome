@@ -12,55 +12,78 @@
       href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
       rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
+    <!-- <link href="@/assets/css/styles.css" rel="stylesheet" /> -->
+    <!-- <link rel="shortcut icon" href="./assets/img/favicon.ico" />
     <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
         crossorigin="anonymous" />
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
-
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" /> -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+    
+    <!--네비게이션-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" >
       <div class="container">
-        <a class="navbar-brand" href="#page-top">구해줘 Home!!!</a>
+        <a class="navbar-brand"><router-link :to="{name : 'main'}" class="link">구해줘 HOME</router-link></a>
+        
         <button class="navbar-toggler" type="button"
           data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
           aria-controls="navbarResponsive" aria-expanded="false"
           aria-label="Toggle navigation">
           Menu <i class="fas fa-bars ms-1"></i>
         </button>
-
         <div id="noUserStorage" style="display:">
-          <div class="collapse navbar-collapse">
+          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul id="state_logout"
               class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <!--부동산 정보 및 게시판 라우터 링크-->
+              <li class="nav-link">
+                <router-link :to="{name : 'house'}" class="link">부동산</router-link>
+              </li>
+              <li class="nav-link">
+                <router-link :to="{name : 'board'}" class="link">게시판</router-link>
+              </li>
+              
+              <!--회원 정보-->
               <li class="nav-item"><a class="nav-link" href="#"
-                data-bs-toggle="modal" data-bs-target="#pollModal">회원가입</a></li>
+                data-toggle="modal" data-target="#userInModal">회원가입</a></li>
               <li class="nav-item"><a class="nav-link" href="#"
-                data-bs-toggle="modal" data-bs-target="#login">로그인</a></li>
+                data-toggle="modal" data-target="#login">로그인</a></li>
               <li class="nav-item"><a class="nav-link" href="#"
-                data-bs-toggle="modal" data-bs-target="#findPw">비밀번호찾기</a></li>
+                data-toggle="modal" data-target="#findPw">비밀번호찾기</a></li>
             </ul>
           </div>
         </div>
         <div id="UserStorage" style="display: none">
-          <div class="collapse navbar-collapse" >
+          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul id="state_login"
               class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <!--부동산 정보 및 게시판 라우터 링크-->
+              <li class="nav-link">
+                <router-link :to="{name : 'house'}" class="link">부동산</router-link>
+              </li>
+              <li class="nav-link">
+                <router-link :to="{name : 'house'}" class="link">게시판</router-link>
+              </li>
+              
+              <!--회원 정보-->
               <li class="nav-item"><a class="nav-link" href="#" onclick="userView()">회원정보</a></li>
               <li class="nav-item"><a class="nav-link"
                 href="javascript:logout();">로그아웃</a></li>
               
-              <!-- 관리자 기능
+               관리자 기능
               <li class="nav-item"><a class="nav-link"
                 href="${root}/user?cmd=goAdminPage">회원정보관리</a></li>
               <li class="nav-item"><a class="nav-link"
-                href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li>  -->
+                href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li> 
             </ul>
           </div>
         </div>
+        
       </div>
     </nav>
     
@@ -73,21 +96,38 @@
     
       </div>
     </header>
+
+    <!--modal-->
+    <login-modal></login-modal>
+    <user-in-modal></user-in-modal>
+    <user-password-find-modal></user-password-find-modal>
   </div>
 
 </template>
 
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script>
+import LoginModal from "@/components/user/LoginModal"
+import UserInModal from '@/components/user/UserInModal.vue';
+import UserPasswordFindModal from '../user/UserPasswordFindModal.vue';
+// import * as bootstrap from 'bootstrap';
+// import $ from 'jquery';
+
 export default {
   name: "TheHeader",
-  components: {},
+  components: {
+    LoginModal,
+    UserInModal,
+    UserPasswordFindModal,
+  },
   data() {
     return {
       message: "",
     };
   },
-  created() {},
+  created() {
+  },
   methods: {},
 };
 </script>

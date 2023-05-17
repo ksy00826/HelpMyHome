@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h2>카카오맵</h2>
         <div id="map"></div>
     </div>
 </template>
