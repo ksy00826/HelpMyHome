@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "HouseSearchBar",
@@ -24,35 +24,38 @@ export default {
       dongName: null,
     };
   },
-  computed: {
-    ...mapState(["sidos", "guguns", "dongs", "houses"]),
-    // sidos() {
-    //   return this.$store.state.sidos;
-    // },
-  },
   created() {
     // this.$store.dispatch("getSido");
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
     this.CLEAR_APT_LIST();
-    this.getSido();
+    this.getDongCodes();
+    // console.log(this.dongcodes);
+    // this.SET_SIDO_LIST();
+    // this.getSido();
   },
   methods: {
-    ...mapActions(["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
-    // sidoList() {
-    //   this.getSido();
-    // },
+    ...mapActions(["getDongCodes", "getSido", "getGugun", "getHouseList"]),
+    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST",
+                      "SET_SIDO_LIST", "SET_GUGUN_LIST", "SET_DONG_LIST"]),
+
     gugunList() {
       // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
       this.gugunName = null;
       if (this.sidoName) this.getGugun(this.sidoName);
     },
+    dongList(){
+      
+    },
     searchApt() {
       if (this.gugunCode) this.getHouseList(this.gugunCode);
     },
   },
+  computed: {
+    ...mapState(["dongcodes"]),
+    ...mapGetters(["sidos", "guguns", "dongs", "houses"])
+  }
 };
 </script>
 
