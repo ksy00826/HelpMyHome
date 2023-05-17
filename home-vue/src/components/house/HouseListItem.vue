@@ -6,10 +6,12 @@
     @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
   >
-    <b-col cols="2" class="text-center align-self-center">
-      <b-img thumbnail src="https://picsum.photos/250/250/?image=58" alt="Image 1"></b-img>
-    </b-col>
-    <b-col cols="10" class="align-self-center"> [{{ house.일련번호 }}] {{ house.아파트 }} </b-col>
+    <b-col>{{ house.apartmentName }}</b-col>
+    <b-col>{{ house.area }}</b-col>
+    <b-col>{{ house.dealAmount }}</b-col>
+    <b-col>{{ house.dongName }}</b-col>
+    <b-col>{{ house.floor }}</b-col>
+    <b-col>{{ house.roadName }}</b-col>
   </b-row>
 </template>
 

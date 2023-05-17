@@ -1,6 +1,7 @@
 <template>
   <b-container v-if="houses && houses.length != 0" class="bv-example-row mt-3">
-    <house-list-item v-for="(house, index) in houses" :key="index" :house="house" />
+    <b-table striped hover :items="houses"></b-table>
+    <!-- <house-list-item v-for="(house, index) in houses" :key="index" :house="house" /> -->
   </b-container>
   <b-container v-else class="bv-example-row mt-3">
     <b-row>
@@ -10,19 +11,19 @@
 </template>
 
 <script>
-import HouseListItem from "@/components/house/HouseListItem";
-import { mapState } from "vuex";
+// import HouseListItem from "@/components/house/HouseListItem";
+import { mapGetters } from "vuex";
 
 export default {
   name: "HouseList",
   components: {
-    HouseListItem,
+    // HouseListItem,
   },
   data() {
     return {};
   },
   computed: {
-    ...mapState(["houses"]),
+    ...mapGetters(["houses"]),
     // houses() {
     //   return this.$store.state.houses;
     // },

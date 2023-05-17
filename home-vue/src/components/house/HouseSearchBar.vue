@@ -7,7 +7,13 @@
       <b-form-select v-model="gugunName" :options="guguns" @change="dongList"></b-form-select>
     </b-col>
     <b-col class="sm-3">
-      <b-form-select v-model="dongName" :options="dongs" @change="searchApt"></b-form-select>
+      <b-form-select v-model="dongName" :options="dongs"></b-form-select>
+    </b-col>
+    <b-col class="sm-3">
+      <b-form-select v-model="year" :options="years"></b-form-select>
+    </b-col>
+    <b-col class="sm-3">
+      <b-form-select v-model="month" :options="months" @change="searchApt"></b-form-select>
     </b-col>
   </b-row>
 </template>
@@ -22,6 +28,8 @@ export default {
       sidoName: null,
       gugunName: null,
       dongName: null,
+      year: '2023',
+      month: '1',
     };
   },
   created() {
@@ -35,26 +43,42 @@ export default {
     // this.getSido();
   },
   methods: {
-    ...mapActions(["getDongCodes", "getSido", "getGugun", "getHouseList"]),
-    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST",
+    ...mapActions(["getDongCodes", "getSido", "getGugun", "getDong", "getHouseList"]),
+    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_DONG_LIST", "CLEAR_APT_LIST",
                       "SET_SIDO_LIST", "SET_GUGUN_LIST", "SET_DONG_LIST"]),
 
     gugunList() {
       // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
       this.gugunName = null;
-      if (this.sidoName) this.getGugun(this.sidoName);
+      if (this.sidoName) {
+        this.getGugun({
+          sidoName: this.sidoName
+        });
+      }
     },
     dongList(){
-      
+      this.CLEAR_DONG_LIST();
+      this.dongName = null;
+      if (this.gugunName) {
+        this.getDong({
+          gugunName: this.gugunName
+        })
+      }
     },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.dongName) this.getHouseList({
+        sidoName: this.sidoName,
+        gugunName: this.gugunName,
+        dongName: this.dongName,
+        year: this.year,
+        month: this.month,
+      });
     },
   },
   computed: {
     ...mapState(["dongcodes"]),
-    ...mapGetters(["sidos", "guguns", "dongs", "houses"])
+    ...mapGetters(["sidos", "guguns", "dongs", 'years', 'months'])
   }
 };
 </script>

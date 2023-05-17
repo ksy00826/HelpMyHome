@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: 'KakaoMap',
     components: {},
@@ -39,7 +40,9 @@ export default {
             this.map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
         }
     },
-    
+    computed: {
+        ...mapGetters(["houses"])
+    }
 };
 </script>
 
