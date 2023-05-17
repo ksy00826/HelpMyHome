@@ -15,6 +15,11 @@ export default {
         houses: [], //리스트 뿌리기
         years: ['2020', '2021', '2022', '2023'],
         months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        searchInfo: {
+            sidoName: null,
+            gugunName: null,
+            dongName: null,
+        },
         // house: null, 
     },
     getters: {
@@ -38,6 +43,9 @@ export default {
         },
         months(state){
             return state.months;
+        },
+        searchInfo(state){
+            return state.searchInfo;
         }
     },
     mutations: {
@@ -87,8 +95,15 @@ export default {
             })
         },
         SET_HOUSE_LIST(state, payload){
-            console.log(payload.houses);
+            // console.log(payload.houses);
             state.houses = payload.houses;
+
+            //현재 검색 정보 저장
+            state.searchInfo = {
+                sidoName: payload.sidoName,
+                gugunName: payload.gugunName,
+                dongName: payload.dongName,
+            }
         }
     },
     actions: {
@@ -127,6 +142,9 @@ export default {
                     commit({
                         type: "SET_HOUSE_LIST",
                         houses: data,
+                        sidoName: payload.sidoName,
+                        gugunName: payload.gugunName,
+                        dongName: payload.dongName,
                     })
                 })
         }

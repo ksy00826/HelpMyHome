@@ -12,6 +12,7 @@ export default {
     data() {
         return {
             map : null,
+            marker: null,
         };
     },
     created() {},
@@ -38,10 +39,50 @@ export default {
             };
 
             this.map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-        }
+        },
+        drawPicker2(address) {
+						this.map.setLevel(7);
+						// 주소-좌표 변환 객체 생성 Geocoder
+						let geocoder = new window.kakao.maps.services.Geocoder();
+
+						// 주소로 위도, 경도 값을 얻어온다.
+                        const thiz = this; //!!!!
+						geocoder.addressSearch(
+										address,
+										function(result, status) {
+											// 정상적으로 검색이 완료 됐으면
+											if (status === window.kakao.maps.services.Status.OK) {
+												let coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+                                                
+												// 결과 값으로 받은 위치를 마커로 표시합니다.
+												thiz.marker = new window.kakao.maps.Marker({
+                                                    map : thiz.map,
+                                                    position : coords,
+                                                });
+
+                                                thiz.map.panTo(coords);
+                                            }
+                                        });
+                                    }
     },
     computed: {
-        ...mapGetters(["houses"])
+        ...mapGetters(["houses", "searchInfo"])
+    },
+    watch:{
+        houses : function(newHouse) {
+            console.log(newHouse)
+            console.log("sear",this.searchInfo)
+            const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
+            console.log(area)
+
+            // //기존 마커 지우기
+            // if (this.marker != null) this.marker.setMap(null);
+            this.loadMap()
+            //그리기
+            newHouse.forEach((house) => {
+                this.drawPicker2(area + " " + house.roadName)
+            })
+        }
     }
 };
 </script>
