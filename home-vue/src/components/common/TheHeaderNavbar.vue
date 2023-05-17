@@ -26,7 +26,7 @@
     
     
     <!--네비게이션-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" >
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " >
       <div class="container">
         <a class="navbar-brand"><router-link :to="{name : 'main'}" class="link">구해줘 HOME</router-link></a>
         
