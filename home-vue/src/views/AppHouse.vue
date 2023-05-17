@@ -1,10 +1,8 @@
 <template>
-
 	<!-- Services-->
-	<section class="page-section" id="services">
 		<div class="container">
 			<div class="text-center">
-				<h2 class="section-heading text-uppercase">집 찾기</h2>
+				<h3 class="underline-hotpink">집 찾기</h3>
 			</div>
 			<kakao-map></kakao-map>
 			<house-search-bar></house-search-bar>
@@ -14,7 +12,6 @@
 			</div>
 			<house-list></house-list>
 		</div>
-	</section>
 </template>
 
 <script>
@@ -44,5 +41,9 @@ export default {
 </script>
 
 <style scoped>
-
+.underline-hotpink {
+    padding-top: 10px;
+  display: inline-block;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgba(231, 27, 139, 0.3) 30%);
+}
 </style>

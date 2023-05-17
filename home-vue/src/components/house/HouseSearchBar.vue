@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "HouseSearchBar",
@@ -32,11 +32,12 @@ export default {
       month: '1',
     };
   },
-  created() {
+  mounted() {
     // this.$store.dispatch("getSido");
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
     this.CLEAR_APT_LIST();
+    // console.log(this.dongcodes);
     if (this.dongcodes.length == 0) this.getDongCodes();
     // console.log(this.dongcodes);
     // this.SET_SIDO_LIST();
@@ -77,8 +78,8 @@ export default {
     },
   },
   computed: {
-    ...mapState(["dongcodes"]),
-    ...mapGetters(["sidos", "guguns", "dongs", 'years', 'months'])
+    // ...mapState(["dongcodes"]),
+    ...mapGetters(["dongcodes", "sidos", "guguns", "dongs", 'years', 'months'])
   }
 };
 </script>

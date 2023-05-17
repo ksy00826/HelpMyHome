@@ -1,5 +1,5 @@
 <template>
-    <div>
+	<div>
         <h3 class="underline-hotpink">QnA게시판</h3>
         <router-view></router-view>
     </div>
