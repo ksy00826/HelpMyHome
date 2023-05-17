@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-center">
         <div id="map"></div>
     </div>
 </template>
