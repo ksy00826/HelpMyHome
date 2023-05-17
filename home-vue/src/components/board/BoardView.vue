@@ -10,8 +10,16 @@
         <b-button variant="outline-primary" @click="moveList">목록</b-button>
       </b-col>
       <b-col class="text-right">
-        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2">글수정</b-button>
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle">글삭제</b-button>
+        <b-button
+          variant="outline-info"
+          size="sm"
+          @click="moveModifyArticle"
+          class="mr-2"
+          >글수정</b-button
+        >
+        <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+          >글삭제</b-button
+        >
       </b-col>
     </b-row>
     <b-row class="mb-1">
@@ -21,8 +29,7 @@
           ${article.subject} [${article.hit}]</h3><div><h6>${article.userid}</div><div>${article.regtime}</h6></div>`"
           class="mb-2"
           border-variant="dark"
-          no-body
-        >
+          no-body>
           <b-card-body class="text-left">
             <div v-html="message"></div>
           </b-card-body>
@@ -45,7 +52,8 @@ export default {
   },
   computed: {
     message() {
-      if (this.article.content) return this.article.content.split("\n").join("<br>");
+      if (this.article.content)
+        return this.article.content.split("\n").join("<br>");
       return "";
     },
   },

@@ -7,14 +7,25 @@
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()">글쓰기</b-button>
+        <b-button variant="outline-primary" @click="moveWrite()"
+          >글쓰기</b-button
+        >
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-table striped hover :items="articles" :fields="fields" @row-clicked="viewArticle">
+        <b-table
+          striped
+          hover
+          :items="articles"
+          :fields="fields"
+          @row-clicked="viewArticle">
           <template #cell(subject)="data">
-            <router-link :to="{ name: 'boardview', params: { articleno: data.item.articleno } }">
+            <router-link
+              :to="{
+                name: 'boardview',
+                params: { articleno: data.item.articleno },
+              }">
               {{ data.item.subject }}
             </router-link>
           </template>
