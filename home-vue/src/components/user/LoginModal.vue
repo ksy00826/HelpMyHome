@@ -19,18 +19,18 @@
 						<div class="mb-3">
 							<i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
 							<label for="question" class="form-label">아이디 * :</label> <input
-								type="text" class="form-control" id="loginId" name="id" />
+								type="text" class="form-control" id="loginId" name="id" v-model="loginId"/>
 						</div>
 						<div class="mb-3">
 							<i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
 							<label for="question" class="form-label">비밀번호 * :</label> <input
 								type="password" class="form-control" id="loginPw"
-								placeholder="영문, 숫자 포함 6자리 이상" name="pw" />
+								placeholder="영문, 숫자 포함 6자리 이상" name="pw" v-model="loginPw"/>
 						</div>
 						<!-- Modal footer -->
 						<div class="modal-footer">
 							<button type="button" id="btn-login"
-								class="btn btn-primary btn-sm">로그인</button>
+								class="btn btn-primary btn-sm" @click="login()">로그인</button>
 						</div>
 					</form>
 				</div>
@@ -40,16 +40,43 @@
 </template>
 
 <script>
+import http from '@/api/http';
 export default {
     name: 'LoginModal',
     components: {},
     data() {
         return {
-            message: '',
+            loginId: "",
+			loginPw: "",
         };
     },
     created() {},
-    methods: {},
+    methods: {
+		login(){
+			
+			http.get(`/user/${this.loginId}`)
+				.then(({data}) => {
+					console.log(data);
+
+					if (data != null){
+						if (data.pw == this.loginPw){
+							//로그인 성공 : 세션 처리
+							sessionStorage.setItem("loginUser", JSON.stringify(data));
+							location.reload();
+						}
+						else{
+							//로그인 실패 : 비밀번호 틀림
+							alert("로그인 실패! 비밀번호가 틀렸습니다");
+						}
+						
+					}
+					else{
+						//로그인 실패 : 회원 정보 없음
+						alert("로그인 실패!");
+					}
+				});
+		}
+	},
 };
 </script>
 

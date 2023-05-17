@@ -36,6 +36,7 @@
           aria-label="Toggle navigation">
           Menu <i class="fas fa-bars ms-1"></i>
         </button>
+
         <div id="noUserStorage" style="display:">
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul id="state_logout"
@@ -58,6 +59,7 @@
             </ul>
           </div>
         </div>
+
         <div id="UserStorage" style="display: none">
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul id="state_login"
@@ -67,19 +69,19 @@
                 <router-link :to="{name : 'house'}" class="link">부동산</router-link>
               </li>
               <li class="nav-link">
-                <router-link :to="{name : 'house'}" class="link">게시판</router-link>
+                <router-link :to="{name : 'board'}" class="link">게시판</router-link>
               </li>
               
               <!--회원 정보-->
-              <li class="nav-item"><a class="nav-link" href="#" onclick="userView()">회원정보</a></li>
-              <li class="nav-item"><a class="nav-link"
-                href="javascript:logout();">로그아웃</a></li>
+              <li class="nav-item"><a class="nav-link" href="#"
+                data-toggle="modal" data-target="#info">회원정보</a></li>
+              <li class="nav-item"><a class="nav-link" href="#" @click="logout()">로그아웃</a></li>
               
-               관리자 기능
+               <!-- 관리자 기능
               <li class="nav-item"><a class="nav-link"
                 href="${root}/user?cmd=goAdminPage">회원정보관리</a></li>
               <li class="nav-item"><a class="nav-link"
-                href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li> 
+                href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li>  -->
             </ul>
           </div>
         </div>
@@ -101,6 +103,7 @@
     <login-modal></login-modal>
     <user-in-modal></user-in-modal>
     <user-password-find-modal></user-password-find-modal>
+    <user-info-modal></user-info-modal>
   </div>
 
 </template>
@@ -111,6 +114,7 @@
 import LoginModal from "@/components/user/LoginModal"
 import UserInModal from '@/components/user/UserInModal.vue';
 import UserPasswordFindModal from '../user/UserPasswordFindModal.vue';
+import UserInfoModal from '../user/UserInfoModal.vue';
 // import * as bootstrap from 'bootstrap';
 // import $ from 'jquery';
 
@@ -120,15 +124,40 @@ export default {
     LoginModal,
     UserInModal,
     UserPasswordFindModal,
+    UserInfoModal,
   },
   data() {
     return {
       message: "",
     };
   },
-  created() {
+  mounted() {
+    //상단바
+    let loginUser = sessionStorage.getItem("loginUser");
+		if (loginUser == null){
+      console.log(loginUser)
+			this.showNoUserStorage();
+		}
+		else{
+      console.log(loginUser)
+			this.showUserStorage();
+		}
   },
-  methods: {},
+  methods: {
+    showNoUserStorage(){
+			document.querySelector("#noUserStorage").setAttribute("style", "display: ;");
+			document.querySelector("#UserStorage").setAttribute("style", "display: none;");
+		},
+					
+		showUserStorage(){
+			document.querySelector("#noUserStorage").setAttribute("style", "display: none ;");
+			document.querySelector("#UserStorage").setAttribute("style", "display: ;");
+		},
+    logout() {
+			sessionStorage.clear();
+			location.reload();
+		},
+  },
 };
 </script>
 

@@ -1,6 +1,5 @@
 <template>
     <!-- 회원정보 modal start -->
-        <div>
         <div class="modal fade" id="info" data-bs-backdrop="static"
             data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -16,111 +15,179 @@
 
                     <!-- Modal body : 정보만 출력 -->
                     <div class="modal-body" id="userInfoDiv">
-                        <form action="">
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">아이디 * :</label>
-                                <input id="infoId" type="text" class="form-control" readonly="readonly"/>
+                                <input id="infoId" type="text" class="form-control" readonly="readonly" v-model="id"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">비밀번호 * :</label>
-                                <input id="infoPw" type="text" class="form-control" readonly="readonly"/>
+                                <input id="infoPw" type="text" class="form-control" readonly="readonly" v-model="pw"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">이름 * :</label>
-                                <input id="infoName" type="text" class="form-control" readonly="readonly"/>
+                                <input id="infoName" type="text" class="form-control" readonly="readonly" v-model="name"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">주소 * :</label>
-                                <input id="infoAddr" type="text" class="form-control" readonly="readonly"/>
+                                <input id="infoAddr" type="text" class="form-control" readonly="readonly" v-model="addr"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">전화번호 * :</label>
-                                <input id="infoPhone" type="text" class="form-control" readonly="readonly"/>
+                                <input id="infoPhone" type="text" class="form-control" readonly="readonly" v-model="phone"/>
                             </div>
-                        </form>
                         
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" id="btn-info-ok" class="btn btn-primary btn-sm">확인</button>
+                            <button type="button" class="btn btn-primary btn-sm" @click="closeModal()">확인</button>
                                 
-                            <button type="button" id="btn-info-go-update" class="btn btn-primary btn-sm">수정</button>
+                            <button type="button" class="btn btn-primary btn-sm" @click="goModifyInfo()">수정</button>
         
-                            <button type="button" id="btn-info-out" class="btn btn-primary btn-sm">탈퇴</button>
+                            <button type="button" class="btn btn-primary btn-sm" @click="outInfo()">탈퇴</button>
                         </div>
                     </div>
                     <!-- Modal body : 수정 가능한 유저 정보 -->
                     <div class="modal-body" style="display: none;" id="userInfoUpdate">
-                        <form action="${root }/user" method="post">
                             <input type="hidden" name="cmd" value="updateInfo">
                             
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">아이디 * :</label> <input
-                                    type="text" class="form-control" id="updateId" name="signId" readonly="readonly"/>
+                                    type="text" class="form-control" id="updateId" name="signId" readonly="readonly" v-model="id"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">비밀번호 * :</label> <input
                                     type="password" class="form-control" id="updatePw"
-                                    placeholder="영문, 숫자 포함 6자리 이상" name="signPw"/>
+                                    placeholder="영문, 숫자 포함 6자리 이상" name="signPw" v-model="pw"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">이름 * :</label> <input
                                     type="text" class="form-control" id="updateName"
-                                    placeholder="User name" name="signName" />
+                                    placeholder="User name" name="signName"  v-model="name"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">주소 * :</label> <input
                                     type="text" class="form-control" id="updateAddr"
-                                    placeholder="Address" name="signAddr" />
+                                    placeholder="Address" name="signAddr"  v-model="addr"/>
                             </div>
                             <div class="mb-3">
                                 <i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
                                 <label for="question" class="form-label">전화번호 * :</label> <input
                                     type="text" class="form-control" id="updatePhone"
-                                    placeholder="010-xxxx-xxxx" name="signPhone" />
+                                    placeholder="010-xxxx-xxxx" name="signPhone"  v-model="phone"/>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button" id="btn-info-update"
-                                    class="btn btn-primary btn-sm">수정</button>
+                                    class="btn btn-primary btn-sm" @click="modifyInfo()">수정</button>
                                 <button type="button" id="btn-info-cancel"
                                     class="btn btn-primary btn-sm">취소</button>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <user-info-update-modal></user-info-update-modal>
-    </div>
+        <!-- <user-info-update-modal></user-info-update-modal> -->
     
 </template>
 
 <script>
-import UserInfoUpdateModal from './UserInfoUpdateModal.vue';
-
+// import UserInfoUpdateModal from './UserInfoUpdateModal.vue';
+import http from '@/api/http';
 export default {
     name: 'UserInfoModal',
     components: {
-        UserInfoUpdateModal,
     },
     data() {
         return {
-            message: '',
+            id: "",
+            pw: "",
+            name: "",
+            addr: "",
+            phone: "",
         };
     },
-    created() {},
-    methods: {},
+    created() {
+        let loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
+        console.log(loginUser);
+        console.log(typeof(loginUser))
+        
+        this.id = loginUser.id;
+        this.pw = loginUser.pw;
+        this.name = loginUser.name;
+        this.addr = loginUser.addr;
+        this.phone = loginUser.phone;
+        
+    },
+    methods: {
+        closeModal(){
+            location.reload();
+        },
+        goModifyInfo(){
+            document.querySelector(`#userInfoDiv`).setAttribute("style", "display: none;");
+            document.querySelector(`#userInfoUpdate`).setAttribute("style", "display: ;");
+        },
+        outInfo(){
+            http.delete(`/user/${this.id}`)
+				.then((response) => {
+					switch (response.status) {
+						case 200://탈퇴성공
+							alert("탈퇴 성공!!!");
+							this.logout();
+							break;
+						case 204:
+							throw new Error("회원탈퇴 실패!!");
+						case 500:
+							throw new Error("회원탈퇴 실패!!");
+					}
+				});
+        },
+        logout() {
+			sessionStorage.clear();
+			location.reload();
+		},
+        modifyInfo(){
+            const user = {
+                id : this.id,
+                pw: this.pw,
+                name: this.name,
+                addr: this.addr,
+                phone: this.phone,
+            };
+			http.put(`/user/${this.id}`, user)
+				.then((response) => {
+					switch (response.status) {
+						case 200:
+                            //세션에 정보 업데이트
+                            sessionStorage.clear();
+                            console.log("newUser")
+                            console.log(user)
+                            sessionStorage.setItem("loginUser", JSON.stringify(user));
+							alert("회원정보 수정 성공!!");
+                            document.querySelector(`#userInfoDiv`).setAttribute("style", "display: ;");
+                            document.querySelector(`#userInfoUpdate`).setAttribute("style", "display: none ;");
+
+							return true;
+						case 204:
+							alert("회원정보 수정  실패!!");
+							return false;
+						case 500:
+							throw new Error("회원정보 수정 실패!!");
+					}
+				})
+        }
+    },
+
 };
+
 </script>
 
 <style scoped></style>
