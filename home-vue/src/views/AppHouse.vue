@@ -39,9 +39,6 @@ export default {
 	HouseList,
   },
   method: {
-	gugunList(){
-		
-	}
   }
 };
 </script>

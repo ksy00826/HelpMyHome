@@ -37,7 +37,7 @@ export default {
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
     this.CLEAR_APT_LIST();
-    this.getDongCodes();
+    if (this.dongcodes.length == 0) this.getDongCodes();
     // console.log(this.dongcodes);
     // this.SET_SIDO_LIST();
     // this.getSido();
