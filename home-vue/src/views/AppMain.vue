@@ -1,35 +1,33 @@
 <template>
-  <div>
-    <button v-on:click="getData">부산 명지 날씨</button>
-    <div class="main_pack">
-      <section class="sc_new cs_weather_new _cs_weather">
-        <div class="content_area">
-          <div class="inner">
-            <table class="scroll_box _horizontal_scroll">
-              <tr class="detail">
-                <td
-                  class="temperature"
-                  v-for="Temperature in Temperature"
-                  :key="Temperature">
-                  {{ Temperature }}
-                </td>
-              </tr>
-              <tr class="detail">
-                <td class="weather" v-for="weather in weather" :key="weather">
-                  {{ weather }}
-                </td>
-              </tr>
-              <tr class="detail">
-                <td class="time" v-for="time in time" :key="time">
-                  {{ time }}
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </section>
+  <b-container>
+    <div>
+      <div class="scroll_box">
+        <table class="table">
+          <tr class="detail">
+            <th>온도</th>
+            <td
+              class="temperature"
+              v-for="Temperature in Temperature"
+              :key="Temperature">
+              {{ Temperature }}
+            </td>
+          </tr>
+          <tr class="detail">
+            <th>날씨</th>
+            <td class="weather" v-for="weather in weather" :key="weather">
+              {{ weather }}
+            </td>
+          </tr>
+          <tr class="detail">
+            <th>시간</th>
+            <td class="time" v-for="time in time" :key="time">
+              {{ time }}
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -47,7 +45,9 @@ export default {
       time: [],
     };
   },
-  created() {},
+  created() {
+    this.getData();
+  },
   methods: {
     getData() {
       axios
@@ -56,8 +56,10 @@ export default {
         )
         .then((res) => {
           var $ = cheerio.load(res.data);
-          // $("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.open > div:nth-child(2) > div > div > div:nth-child(3) > div > div > div > div.graph_inner._hourly_weather > ul > li").length;
-          var number = 12;
+
+          var number = $(
+            "#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.open > div:nth-child(2) > div > div > div:nth-child(3) > div > div > div > div.graph_inner._hourly_weather > ul > li"
+          ).length;
           this.number = number;
 
           for (var i = 1; i <= number; i++) {
@@ -103,18 +105,16 @@ export default {
 .temperature,
 .weather,
 .time {
-  width: 12.5%;
+  /* width: 12.5%; */
   padding-top: 20px;
 }
 
 .scroll_box {
   overflow: hidden;
   overflow-x: scroll;
+  width: 500px;
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-.cs_weather_new .content_area > .inner {
   margin: 0 10px;
   padding: 15px 20px;
   background-color: #fff;
@@ -127,12 +127,13 @@ export default {
   -ms-border-radius: 8px;
   border-radius: 8px;
 }
-.main_pack {
-  float: left;
-  display: inline;
-  width: 500px;
-  margin: 0px 0 0 500;
-  padding: 24px 0 54px;
-  zoom: 1;
+
+table {
+  /* height: 100%;
+  width: 100%; */
+}
+td,
+th {
+  width: 100px;
 }
 </style>
