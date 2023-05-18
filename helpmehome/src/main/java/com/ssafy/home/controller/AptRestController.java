@@ -17,10 +17,8 @@ import com.ssafy.home.model.DongCodeDto;
 import com.ssafy.home.model.HomeInfoDto;
 import com.ssafy.home.model.HomeResultDto;
 import com.ssafy.home.model.InterestAreaDto;
+import com.ssafy.home.model.SidoDealInfo;
 import com.ssafy.home.model.service.AptService;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/home")
@@ -34,11 +32,27 @@ public class AptRestController {
 		this.aptService = aptService;
 	}
 	
+	//main page : 연도별, 시도별, 아파트 거래정보
+	@GetMapping(value = "/apt/sidoDealInfo")
+	public ResponseEntity<?> getSidoDealInfo(){
+		try {
+			List<SidoDealInfo> sidoDealList = aptService.selectSidoDealInfo();
+			
+			if(sidoDealList != null && !sidoDealList.isEmpty()) {
+				return new ResponseEntity<List<SidoDealInfo>>(sidoDealList, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
 	//board 관련 기능 : R, D
 	
 	//동코드 전체 조회 : 초기 화면에 출력할 동코드 조회 후 리스트 반환하면 js에서 출력 : 시도 이름 출력
 	@GetMapping(value = "/apt/dongcode")
-	@ApiOperation(value = "Book 객체를 저장한다.", response = Integer.class)
 	public ResponseEntity<?> getDongCodeList(){
 		try {
 			List<DongCodeDto> dongCodeLs = aptService.selectDongCode();

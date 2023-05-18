@@ -9,6 +9,7 @@ import com.ssafy.home.model.DongCodeDto;
 import com.ssafy.home.model.HomeInfoDto;
 import com.ssafy.home.model.HomeResultDto;
 import com.ssafy.home.model.InterestAreaDto;
+import com.ssafy.home.model.SidoDealInfo;
 
 @Mapper
 public interface AptMapper {
@@ -26,6 +27,8 @@ public interface AptMapper {
 	int registInterest(InterestAreaDto newArea) throws SQLException;
 
 	List<InterestAreaDto> getInterestList(String userId) throws SQLException;
+
+	List<SidoDealInfo> getSidoDealInfo() throws SQLException;
 
 //	List<HomeResultDto> getInterList(String selectedDongCode, int year, int month) throws SQLException;
 

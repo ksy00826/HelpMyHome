@@ -7,6 +7,7 @@ import com.ssafy.home.model.DongCodeDto;
 import com.ssafy.home.model.HomeInfoDto;
 import com.ssafy.home.model.HomeResultDto;
 import com.ssafy.home.model.InterestAreaDto;
+import com.ssafy.home.model.SidoDealInfo;
 
 public interface AptService {
 	List<DongCodeDto> selectDongCode() throws SQLException;
@@ -24,6 +25,8 @@ public interface AptService {
 	int insertInterest(InterestAreaDto newArea) throws SQLException;
 
 	List<InterestAreaDto> getInterestLs(String id)throws SQLException;
+
+	List<SidoDealInfo> selectSidoDealInfo()throws SQLException;
 
 //	String getDongCode(String curSido, String curGugun, String curDong) throws SQLException;
 

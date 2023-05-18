@@ -11,6 +11,7 @@ import com.ssafy.home.model.DongCodeDto;
 import com.ssafy.home.model.HomeInfoDto;
 import com.ssafy.home.model.HomeResultDto;
 import com.ssafy.home.model.InterestAreaDto;
+import com.ssafy.home.model.SidoDealInfo;
 import com.ssafy.home.model.mapper.AptMapper;
 
 @Service
@@ -168,6 +169,11 @@ public class AptServiceImpl implements AptService{
 	@Override
 	public List<InterestAreaDto> getInterestLs(String userId) throws SQLException {
 		return mapper.getInterestList(userId);
+	}
+
+	@Override
+	public List<SidoDealInfo> selectSidoDealInfo() throws SQLException {
+		return mapper.getSidoDealInfo();
 	}
 
 //	@Override

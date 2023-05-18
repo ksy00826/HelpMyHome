@@ -41,4 +41,15 @@
 		FROM interestArea
 		WHERE userId = #{userId}
 	</select>
+	
+	<select id="getSidoDealInfo" resultType="sidoDealInfo">
+	<!-- 
+		select *
+		from sidoDealInfo
+		order by dealYear asc -->
+		
+		select dealYear, count(*) cnt
+		from housedeal
+		group by dealYear;
+	</select>
 </mapper>

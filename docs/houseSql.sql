@@ -90,3 +90,31 @@ commit;
 
 select *
 from user;
+
+select *
+from houseinfo
+where buildYear = 2012;
+
+select substr(dongcode, 1, 2)
+from houseinfo;
+
+# 동코드 두 자리수 별 시도 이름
+drop table sidoNameCode;
+create table sidoNameCode
+select substr(dongcode, 1, 2) code, any_value(sidoName) sidoName
+from dongcode
+group by substr(dongcode, 1, 2);
+
+# 동코드 두 자리수 별 거래 정보
+drop table sidoCodeDealInfo;
+create table sidoCodeDealInfo
+select hd.dealYear dealYear, substr(hi.dongcode, 1, 2) `code`, count(*) dealCnt
+from housedeal hd
+join houseinfo hi on hi.aptCode = hd.aptCode
+group by hd.dealYear, substr(hi.dongcode, 1, 2);
+
+##합친거!!!
+create table sidoDealInfo 
+select scd.dealYear, sc.sidoName, scd.dealCnt
+from sidoCodeDealInfo scd
+join sidoNameCode sc on sc.code = scd.code;
