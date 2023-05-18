@@ -1,40 +1,40 @@
 <template>
-    <b-container>
-      <div>
-        <div class="scroll_box">
-          <table class="table">
-            <tr class="detail">
-              <th>온도</th>
-              <td
-                class="temperature"
-                v-for="Temperature in Temperature"
-                :key="Temperature">
-                {{ Temperature }}
-              </td>
-            </tr>
-            <tr class="detail">
-              <th>날씨</th>
-              <td class="weather" v-for="weather in weather" :key="weather">
-                {{ weather }}
-              </td>
-            </tr>
-            <tr class="detail">
-              <th>시간</th>
-              <td class="time" v-for="time in time" :key="time">
-                {{ time }}
-              </td>
-            </tr>
-          </table>
-        </div>
+  <b-container>
+    <div>
+      <div class="scroll_box">
+        <table class="table">
+          <tr class="detail">
+            <th>온도</th>
+            <td
+              class="temperature"
+              v-for="Temperature in Temperature"
+              :key="Temperature">
+              {{ Temperature }}
+            </td>
+          </tr>
+          <tr class="detail">
+            <th>날씨</th>
+            <td class="weather" v-for="weather in weather" :key="weather">
+              {{ weather }}
+            </td>
+          </tr>
+          <tr class="detail">
+            <th>시간</th>
+            <td class="time" v-for="time in time" :key="time">
+              {{ time }}
+            </td>
+          </tr>
+        </table>
       </div>
-    </b-container>
+    </div>
+  </b-container>
 </template>
 
 <script>
 var axios = require("axios");
 var cheerio = require("cheerio");
 export default {
-    name: 'MainWeather',
+  name: "MainWeather",
   data() {
     return {
       number: "",
