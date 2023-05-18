@@ -8,21 +8,22 @@
         controls
         indicators
         background="#ababab"
-        img-width="1024"
-        img-height="480"
+        img-width="512"
+        img-height="240"
         style="text-shadow: 1px 1px 2px #333"
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd">
         <b-carousel-slide
           class="idx"
-          v-for="idx in idx"
-          :key="idx"
-          img-src="//t1.daumcdn.net/thumb/T90x90/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fnews%2F202305%2F16%2FNEWS1%2F20230516054123211ejdl.jpg">
-          {{ image[idx] }}
-          {{ title[idx] }}
+          v-for="i in idx"
+          :key="i"
+          :img-src="image[i]">
+          {{ image[i] }}
+          {{ title[i] }}
+          <!-- <img :src="image[i]"> -->
           <br />
           <br />
-          {{ content[idx] }}
+          {{ content[i] }}
           <br />
         </b-carousel-slide>
         <!-- Text slides with image -->
@@ -81,6 +82,7 @@ export default {
   name: "MainNews",
   data() {
     return {
+      loaded: false,
       slide: 0,
       sliding: null,
       // 뉴스 제목, 내용, 이미지
@@ -92,6 +94,7 @@ export default {
     };
   },
   created() {
+    this.loaded = false;
     this.getData();
   },
   methods: {
@@ -119,7 +122,6 @@ export default {
               ).text()
             );
           }
-
           for (var j = 1; j <= number; j++) {
             this.content.push(
               $(
@@ -135,11 +137,12 @@ export default {
                 "#mCenter > div.wrap_issue > ul > li:nth-child(" +
                   k +
                   ") > a > img"
-              ).text()
+              ).attr('src')
             );
           }
-          console.log(this.weather);
-          console.log(this.image);
+          // console.log(this.weather);
+          console.log("image", this.image);
+          this.loaded = true;
         });
     },
   },
