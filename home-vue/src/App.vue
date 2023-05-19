@@ -61,8 +61,9 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+nav a.router-link {
+  font-weight: bold;
+  color: #2c3e50;
 }
 
 .content{
@@ -70,7 +71,7 @@ nav a.router-link-exact-active {
   padding: 10px;
   background-color: white;
   border-radius: 2em;
-  box-shadow: 0px 0px 20px 0px rgb(240, 240, 240);
+  box-shadow: 0px 0px 20px 5px rgb(240, 240, 240);
 }
 
 </style>

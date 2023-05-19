@@ -26,68 +26,53 @@
     
     
     <!--네비게이션-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " >
-      <div class="container">
-        <a class="navbar-brand"><router-link :to="{name : 'main'}" class="link">구해줘 HOME</router-link></a>
-        
-        <button class="navbar-toggler" type="button"
-          data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive" aria-expanded="false"
-          aria-label="Toggle navigation">
-          Menu <i class="fas fa-bars ms-1"></i>
-        </button>
+    <b-navbar toggleable="sm" type="light" variant="light">
+      <b-navbar-brand><router-link :to="{name : 'main'}" class="link">구해줘 HOME</router-link></b-navbar-brand>
 
-        <div id="noUserStorage" style="display:">
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul id="state_logout"
-              class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-              <!--부동산 정보 및 게시판 라우터 링크-->
-              <li class="nav-link">
-                <router-link :to="{name : 'house'}" class="link">부동산</router-link>
-              </li>
-              <li class="nav-link">
-                <router-link :to="{name : 'board'}" class="link">게시판</router-link>
-              </li>
-              
-              <!--회원 정보-->
-              <li class="nav-item"><a class="nav-link" href="#"
-                data-toggle="modal" data-target="#userInModal">회원가입</a></li>
-              <li class="nav-item"><a class="nav-link" href="#"
-                data-toggle="modal" data-target="#login">로그인</a></li>
-              <li class="nav-item"><a class="nav-link" href="#"
-                data-toggle="modal" data-target="#findPw">비밀번호찾기</a></li>
-            </ul>
-          </div>
+
+
+      <!--토글 목록-->
+      <!-- Right aligned nav items -->
+      <b-collapse id="nav-text-collapse" is-nav>
+        <!--비회원-->
+        <div id="noUserStorage" style="display:" class="ml-auto">
+          <b-navbar-nav>
+             <!--부동산 정보 및 게시판 라우터 링크-->
+            <b-nav-text><router-link :to="{name : 'house'}" class="nav-link">부동산</router-link></b-nav-text>
+            <b-nav-text><router-link :to="{name : 'board'}" class="nav-link">게시판</router-link></b-nav-text>
+            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#userInModal">회원가입</a></b-nav-text>
+            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#login">로그인</a></b-nav-text>
+            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#findPw">비밀번호찾기</a></b-nav-text>
+          </b-navbar-nav>
         </div>
-
+        
+        <!--회원-->
         <div id="UserStorage" style="display: none">
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul id="state_login"
-              class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-              <!--부동산 정보 및 게시판 라우터 링크-->
-              <li class="nav-link">
-                <router-link :to="{name : 'house'}" class="link">부동산</router-link>
-              </li>
-              <li class="nav-link">
-                <router-link :to="{name : 'board'}" class="link">게시판</router-link>
-              </li>
-              
-              <!--회원 정보-->
-              <li class="nav-item"><a class="nav-link" href="#"
-                data-toggle="modal" data-target="#info">회원정보</a></li>
-              <li class="nav-item"><a class="nav-link" href="#" @click="logout()">로그아웃</a></li>
-              
-               <!-- 관리자 기능
+          <b-navbar-nav>
+             <!--부동산 정보 및 게시판 라우터 링크-->
+            <b-nav-text><router-link :to="{name : 'house'}" class="nav-link">부동산</router-link></b-nav-text>
+            <b-nav-text><router-link :to="{name : 'board'}" class="nav-link">게시판</router-link></b-nav-text>
+            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#info">회원정보</a></b-nav-text>
+            <b-nav-text><a class="nav-link" href="#" @click="logout()">로그아웃</a></b-nav-text>
+          </b-navbar-nav>
+        </div>
+                       <!-- 관리자 기능
               <li class="nav-item"><a class="nav-link"
                 href="${root}/user?cmd=goAdminPage">회원정보관리</a></li>
               <li class="nav-item"><a class="nav-link"
                 href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li>  -->
-            </ul>
-          </div>
-        </div>
-        
-      </div>
-    </nav>
+
+      </b-collapse>
+
+      <!--토글 버튼-->
+      <b-navbar-toggle target="nav-text-collapse">
+        <template #default="{ expanded }">
+          <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
+          <b-icon v-else icon="chevron-bar-down"></b-icon>
+        </template>
+      </b-navbar-toggle>
+    </b-navbar>
+
     
     <!-- Masthead-->
     <header class="masthead">
