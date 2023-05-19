@@ -14,9 +14,20 @@
           </tr>
           <tr class="detail">
             <th>날씨</th>
+            <td
+              class="weather"
+              v-for="index in idx"
+              :key="index"
+              :class="weather_img[index]">
+              {{ weather[index] }}
+            </td>
+            <!-- <td
+              v-for="weather_img in weather_img"
+              :key="weather_img"
+              :class="weather_img"></td>
             <td class="weather" v-for="weather in weather" :key="weather">
               {{ weather }}
-            </td>
+            </td> -->
           </tr>
           <tr class="detail">
             <th>시간</th>
@@ -37,9 +48,12 @@ export default {
   name: "MainWeather",
   data() {
     return {
+      // 날씨 개수, 날씨 개수(인덱스), 온도, 날씨, 날씨 이미지, 시간
       number: "",
+      idx: [],
       Temperature: [],
       weather: [],
+      weather_img: [],
       time: [],
     };
   },
@@ -88,6 +102,18 @@ export default {
               ).text()
             );
           }
+          for (var l = 1; l <= number; l++) {
+            this.weather_img.push(
+              $(
+                "#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.open > div:nth-child(2) > div > div > div:nth-child(3) > div > div > div > div.graph_inner._hourly_weather > ul > li:nth-child(" +
+                  l +
+                  ") > dl > dd.weather_box > i"
+              ).attr("class")
+            );
+          }
+          for (var m = 0; m < number; m++) {
+            this.idx.push(m);
+          }
           console.log(this.weather);
         });
     },
@@ -111,6 +137,7 @@ export default {
   overflow: hidden;
   overflow-x: scroll;
   width: 500px;
+  height: 210px;
   -ms-overflow-style: none;
   scrollbar-width: none;
   margin: 0 10px;
@@ -126,12 +153,47 @@ export default {
   border-radius: 8px;
 }
 
-table {
-  /* height: 100%;
-  width: 100%; */
-}
 td,
 th {
   width: 100px;
+}
+.wt_icon.ico_wt1 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt1.svg);
+}
+.wt_icon.ico_wt2 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt2.svg);
+}
+.wt_icon.ico_wt3 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt3.svg);
+}
+.wt_icon.ico_wt4 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt4.svg);
+}
+.wt_icon.ico_wt5 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt5.svg);
+}
+.wt_icon.ico_wt6 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt6.svg);
+}
+.wt_icon.ico_wt7 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt7.svg);
+}
+.wt_icon.ico_wt8 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt8.svg);
+}
+.wt_icon.ico_wt9 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt9.svg);
+}
+.wt_icon.ico_wt10 {
+  background-image: url(https://ssl.pstatic.net/sstatic/keypage/outside/scui/weather_new_new/img/weather_svg_v2/icon_flat_wt10.svg);
+}
+.wt_icon {
+  /* display: inline-block;
+  vertical-align: top;
+  width: 34px;
+  height: 34px; */
+  background-repeat: no-repeat;
+  background-size: 34px 34px;
+  -webkit-background-size: 34px 34px;
 }
 </style>
