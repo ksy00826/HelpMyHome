@@ -32,15 +32,14 @@ export default {
       month: '1',
     };
   },
-  mounted() {
+  async mounted() {
     // this.$store.dispatch("getSido");
     // this.sidoList();
-    this.CLEAR_SIDO_LIST();
+    // this.CLEAR_SIDO_LIST();
+    this.SET_SIDO_LIST();
     this.CLEAR_APT_LIST();
-    // console.log(this.dongcodes);
     if (this.dongcodes.length == 0) this.getDongCodes();
     // console.log(this.dongcodes);
-    // this.SET_SIDO_LIST();
     // this.getSido();
   },
   methods: {

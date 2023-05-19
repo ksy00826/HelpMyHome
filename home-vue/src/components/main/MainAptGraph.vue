@@ -80,7 +80,7 @@ export default {
                         this.chartData.datasets[0].data.push(info.cnt);
                     })
 
-                    console.log(this.chartData)
+                    // console.log(this.chartData)
                     this.loaded = true
                 })
         },
