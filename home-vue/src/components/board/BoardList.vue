@@ -1,10 +1,36 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <b-alert show><h3>글목록</h3></b-alert>
-      </b-col>
-    </b-row>
+    <div class="col-md-7 offset-3 mb-2">
+      <form class="d-flex" id="form-search" action="">
+        <input type="hidden" name="action" value="list" />
+        <input type="hidden" name="pgno" value="1" />
+        <select
+          name="key"
+          id="key"
+          class="form-select form-select-sm ms-5 me-1 w-50"
+          aria-label="검색조건">
+          <option selected>검색조건</option>
+          <option value="article_no">글번호</option>
+          <option value="subject">제목</option>
+          <option value="user_id">작성자</option>
+        </select>
+        <div class="input-group input-group-sm">
+          <div>
+            <input
+              type="text"
+              name="word"
+              id="word"
+              class="form-control"
+              placeholder="검색어..." />
+          </div>
+          <div>
+            <button id="btn-search" class="btn btn-dark" type="button">
+              검색
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
     <b-row class="mb-1">
       <b-col class="text-right">
         <b-button variant="outline-primary" @click="moveWrite()"
@@ -32,6 +58,15 @@
         </b-table>
       </b-col>
     </b-row>
+    <div class="col-md-7 offset-4 mb-2">
+      <div class="mt-3">
+        <b-pagination
+          v-model="currentPage"
+          pills
+          :total-rows="rows"
+          size="lg"></b-pagination>
+      </div>
+    </div>
   </b-container>
 </template>
 
