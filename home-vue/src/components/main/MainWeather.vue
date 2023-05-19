@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <div>
+    <b-card title="실시간 날씨">
       <div class="scroll_box">
         <table class="table">
           <tr class="detail">
@@ -37,7 +37,7 @@
           </tr>
         </table>
       </div>
-    </div>
+    </b-card>
   </b-container>
 </template>
 

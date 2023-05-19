@@ -1,8 +1,16 @@
 <template>
   <b-container>
-    <main-weather></main-weather>
-    <main-news></main-news>
-    <main-apt-graph></main-apt-graph>
+    <b-row>
+      <b-col>
+        <main-weather></main-weather>
+      </b-col>
+      <b-col>
+        <main-apt-graph></main-apt-graph>
+      </b-col>
+    </b-row>
+    <b-row>
+      <main-news></main-news>
+    </b-row>
   </b-container>
 </template>
 
