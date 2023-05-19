@@ -16,10 +16,13 @@
           v-for="i in idx"
           :key="i"
           :img-src="image[i]"
-          :img-alt="image[i]">
-          {{ image[i] }}
-          {{ title[i] }}
-          <!-- <img :src="image[i]"> -->
+          :href="info[i]">
+          <a
+            class="mt-4"
+            style="position: relative; top: -230px; border: "
+            :href="info[i]"
+            >{{ title[i] }}</a
+          >
           <br />
           <br />
           {{ content[i] }}
@@ -27,15 +30,14 @@
         </b-carousel-slide>
       </b-carousel>
 
-      <p class="mt-4">
+      <!-- <p class="mt-4">
         Slide #: {{ slide }}<br />
         Sliding: {{ sliding }}
-      </p>
+      </p> -->
     </div>
   </b-container>
 </template>
 <script>
-// import { index } from "cheerio/lib/api/traversing";
 var axios = require("axios");
 var cheerio = require("cheerio");
 export default {
@@ -43,13 +45,14 @@ export default {
   data() {
     return {
       loaded: false,
-      slide: 0,
-      sliding: null,
-      // 뉴스 제목, 내용, 이미지
+      // slide: 0,
+      // sliding: null,
+      // 뉴스 제목, 내용, 이미지, 뉴스 기사 url, 인덱스
       number: "",
       title: [],
       content: [],
       image: [],
+      info: [],
       idx: [0, 1, 2, 3, 4],
     };
   },
@@ -100,6 +103,17 @@ export default {
               ).attr("src")
             );
           }
+
+          for (var l = 1; l <= number; l++) {
+            this.info.push(
+              $(
+                "#mCenter > div.wrap_issue > ul > li:nth-child(" +
+                  l +
+                  ") > div > strong > a"
+              ).attr("href")
+            );
+          }
+
           // console.log(this.weather);
           console.log("image", this.image);
           this.loaded = true;
