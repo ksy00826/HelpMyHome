@@ -14,8 +14,7 @@ export default {
         return {
             map : null,
             markers: [],
-            sumLat: 0,
-            sumLng: 0,
+            bounds: null, //지도의 영역 범위 재설정을 위한 변수
         };
     },
     created() {},
@@ -63,6 +62,8 @@ export default {
 
             // 생성된 마커를 배열에 추가합니다
             this.markers.push(marker);
+            //바운드 배열에도 위치를 추가
+            this.bounds.extend(position);
         },// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
         makeOverListener(map, customOverlay) {
             return function() {
@@ -91,6 +92,8 @@ export default {
             console.log(newHouse)
             // //기존 마커 지우기
             this.removeMarker();
+            //바운드 객체
+            this.bounds = new kakao.maps.LatLngBounds();
 
             if (newHouse.length != 0){
                 // console.log("sear",this.searchInfo)
@@ -104,15 +107,8 @@ export default {
                 newHouse.forEach((house) => {
                     // console.log(house)
                     this.addMarker(new window.kakao.maps.LatLng(house.lat, house.lng), house.apartmentName)
-                    this.sumLat = Number(this.sumLat) + Number(house.lat);
-                    this.sumLng = Number(this.sumLng) + Number(house.lng);
                 })
-                console.log(this.sumLat / newHouse.length);
-                console.log(this.sumLng / newHouse.length);
-                const avgLat = this.sumLat / newHouse.length;
-                const avgLng = this.sumLng / newHouse.length;
-                this.map.panTo(new window.kakao.maps.LatLng(avgLat, avgLng));
-                this.map.setLevel(6);
+                this.map.setBounds(this.bounds); //지도 영역 재지정
             }
         }
     }

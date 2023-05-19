@@ -2,14 +2,16 @@
 	<!-- Services-->
 		<div class="container">
 			<div class="text-center">
-				<h3 class="underline-hotpink">집 찾기</h3>
+				<h3 class="underline-hotpink">아파트 매매정보</h3>
 			</div>
-			<kakao-map></kakao-map>
-			<house-search-bar></house-search-bar>
-			<div>
-				<input type="text" id="searchName">
-				<button type="button" onclick="searchName()">아파트 이름 검색</button>
-			</div>
+			<b-card>
+				<house-search-bar></house-search-bar>
+				<kakao-map></kakao-map>
+				<!-- <div>
+					<input type="text" id="searchName">
+					<button type="button" onclick="searchName()">아파트 이름 검색</button>
+				</div> -->
+			</b-card>
 			<house-list></house-list>
 		</div>
 </template>
