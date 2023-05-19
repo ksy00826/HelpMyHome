@@ -21,13 +21,6 @@
               :class="weather_img[index]">
               {{ weather[index] }}
             </td>
-            <!-- <td
-              v-for="weather_img in weather_img"
-              :key="weather_img"
-              :class="weather_img"></td>
-            <td class="weather" v-for="weather in weather" :key="weather">
-              {{ weather }}
-            </td> -->
           </tr>
           <tr class="detail">
             <th>시간</th>
@@ -136,8 +129,8 @@ export default {
 .scroll_box {
   overflow: hidden;
   overflow-x: scroll;
-  width: 500px;
-  height: 210px;
+  width: 445px;
+  height: 230px;
   -ms-overflow-style: none;
   scrollbar-width: none;
   margin: 0 10px;
