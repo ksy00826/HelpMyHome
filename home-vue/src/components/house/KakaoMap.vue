@@ -46,22 +46,35 @@ export default {
         },
 
             // 마커를 생성하고 지도위에 표시하는 함수입니다
-        addMarker(position) {
+        addMarker(position, aptName) {
             // 마커를 생성합니다
             console.log(position)
             var marker = new window.kakao.maps.Marker({
-                position: position
+                position: position,
+                title: aptName,
             });
-            // var marker = new kakao.maps.Marker({
-            //     map: map, // 마커를 표시할 지도
-            //     position: positions[i].latlng, // 마커를 표시할 위치
-            //     title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            //     image : markerImage // 마커 이미지 
-            // });
+            var infowindow = new kakao.maps.InfoWindow({
+                content: aptName,
+            })
             
-            // 생성된 마커를 배열에 추가합니다
             marker.setMap(this.map)
+            kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, marker, infowindow));
+            kakao.maps.event.addListener(marker, 'mouseout', this.makeOutListener(infowindow));
+
+            // 생성된 마커를 배열에 추가합니다
             this.markers.push(marker);
+        },// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+        makeOverListener(map, marker, infowindow) {
+            return function() {
+                infowindow.open(map, marker);
+            };
+        },
+
+        // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+        makeOutListener(infowindow) {
+            return function() {
+                infowindow.close();
+            };
         }
     },
     computed: {
@@ -70,29 +83,32 @@ export default {
     watch:{
         houses : function(newHouse) {
             console.log(newHouse)
-            // console.log("sear",this.searchInfo)
-            const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
-            console.log(area)
 
-            // //기존 마커 지우기
-            // if (this.marker != null) this.marker.setMap(null);
-            this.loadMap() //임시로 지도 재생성으로 함
-            //그리기
-            //초기화
-            this.sumLat = 0;
-            this.sumLng = 0;
-            newHouse.forEach((house) => {
-                // console.log(house)
-                this.addMarker(new window.kakao.maps.LatLng(house.lat, house.lng))
-                this.sumLat = Number(this.sumLat) + Number(house.lat);
-                this.sumLng = Number(this.sumLng) + Number(house.lng);
-            })
-            console.log(this.sumLat / newHouse.length);
-            console.log(this.sumLng / newHouse.length);
-            const avgLat = this.sumLat / newHouse.length;
-            const avgLng = this.sumLng / newHouse.length;
-            this.map.panTo(new window.kakao.maps.LatLng(avgLat, avgLng));
-            this.map.setLevel(6);
+            if (newHouse.length != 0){
+                // console.log("sear",this.searchInfo)
+                const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
+                console.log(area)
+
+                // //기존 마커 지우기
+                // if (this.marker != null) this.marker.setMap(null);
+                this.loadMap() //임시로 지도 재생성으로 함
+                //그리기
+                //초기화
+                this.sumLat = 0;
+                this.sumLng = 0;
+                newHouse.forEach((house) => {
+                    // console.log(house)
+                    this.addMarker(new window.kakao.maps.LatLng(house.lat, house.lng), house.apartmentName)
+                    this.sumLat = Number(this.sumLat) + Number(house.lat);
+                    this.sumLng = Number(this.sumLng) + Number(house.lng);
+                })
+                console.log(this.sumLat / newHouse.length);
+                console.log(this.sumLng / newHouse.length);
+                const avgLat = this.sumLat / newHouse.length;
+                const avgLng = this.sumLng / newHouse.length;
+                this.map.panTo(new window.kakao.maps.LatLng(avgLat, avgLng));
+                this.map.setLevel(6);
+            }
         }
     }
 };
