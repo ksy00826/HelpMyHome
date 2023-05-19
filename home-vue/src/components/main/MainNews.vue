@@ -4,12 +4,10 @@
       <b-carousel
         id="carousel-1"
         v-model="slide"
-        :interval="4000"
+        :interval="3000"
         controls
         indicators
         background="#ababab"
-        img-width="512"
-        img-height="240"
         style="text-shadow: 1px 1px 2px #333"
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd">
@@ -17,7 +15,8 @@
           class="idx"
           v-for="i in idx"
           :key="i"
-          :img-src="image[i]">
+          :img-src="image[i]"
+          :img-alt="image[i]">
           {{ image[i] }}
           {{ title[i] }}
           <!-- <img :src="image[i]"> -->
@@ -51,7 +50,7 @@ export default {
       title: [],
       content: [],
       image: [],
-      idx: [0, 1, 2],
+      idx: [0, 1, 2, 3, 4],
     };
   },
   created() {
@@ -72,7 +71,7 @@ export default {
         .then((res) => {
           var $ = cheerio.load(res.data);
 
-          var number = 3;
+          var number = 5;
           this.number = number;
           for (var i = 1; i <= number; i++) {
             this.title.push(
@@ -109,3 +108,21 @@ export default {
   },
 };
 </script>
+<style scoped>
+/* . {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 400px;
+} */
+.carousel-item {
+  /* overflow: hidden; */
+  /* max-width: 400px; */
+  width: 100%;
+  height: 400px;
+  /* background-size: fill; */
+  object-fit: fill;
+  object-position: center center;
+  background-size: contain;
+}
+</style>
