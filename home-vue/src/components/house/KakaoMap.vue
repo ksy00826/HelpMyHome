@@ -75,6 +75,12 @@ export default {
             return function() {
                 infowindow.close();
             };
+        },
+        removeMarker(){
+            for (var marker of this.markers){
+                marker.setMap(null);
+            }
+            marker = []
         }
     },
     computed: {
@@ -83,15 +89,16 @@ export default {
     watch:{
         houses : function(newHouse) {
             console.log(newHouse)
+            // //기존 마커 지우기
+            // if (this.marker != null) this.marker.setMap(null);
+            // this.loadMap() //임시로 지도 재생성으로 함
+            this.removeMarker();
 
             if (newHouse.length != 0){
                 // console.log("sear",this.searchInfo)
                 const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
                 console.log(area)
 
-                // //기존 마커 지우기
-                // if (this.marker != null) this.marker.setMap(null);
-                this.loadMap() //임시로 지도 재생성으로 함
                 //그리기
                 //초기화
                 this.sumLat = 0;
