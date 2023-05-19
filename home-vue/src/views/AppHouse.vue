@@ -5,21 +5,25 @@
 				<h3 class="underline-hotpink">아파트 매매정보</h3>
 			</div>
 			<b-card>
-				<house-search-bar></house-search-bar>
+				<b-row>
+					<b-col class="text-left">
+						<house-search-bar></house-search-bar>
+					</b-col>
+					<b-col class="text-right">
+						<house-keyword-search></house-keyword-search>
+					</b-col>
+				</b-row>
 				<kakao-map></kakao-map>
-				<!-- <div>
-					<input type="text" id="searchName">
-					<button type="button" onclick="searchName()">아파트 이름 검색</button>
-				</div> -->
 			</b-card>
-			<house-list></house-list>
+			<!-- <house-list></house-list> -->
 		</div>
 </template>
 
 <script>
 import KakaoMap from "@/components/house/KakaoMap.vue"
 import HouseSearchBar from '@/components/house/HouseSearchBar';
-import HouseList from '@/components/house/HouseList.vue';
+// import HouseList from '@/components/house/HouseList.vue';
+import HouseKeywordSearch from "@/components/house/HouseKeywordSearch.vue";
 
 export default {
   name: "AppHouse",
@@ -35,7 +39,8 @@ export default {
   components: {
     KakaoMap,
 	HouseSearchBar,
-	HouseList,
+	// HouseList,
+	HouseKeywordSearch,
   },
   method: {
   }

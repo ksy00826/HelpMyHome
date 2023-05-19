@@ -28,6 +28,8 @@ public interface AptService {
 
 	List<SidoDealInfo> selectSidoDealInfo()throws SQLException;
 
+	List<HomeResultDto> getKeywordHomeList(String keyword) throws SQLException;
+
 //	String getDongCode(String curSido, String curGugun, String curDong) throws SQLException;
 
 }

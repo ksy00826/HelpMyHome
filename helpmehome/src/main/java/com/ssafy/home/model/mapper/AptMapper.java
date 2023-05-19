@@ -30,6 +30,8 @@ public interface AptMapper {
 
 	List<SidoDealInfo> getSidoDealInfo() throws SQLException;
 
-//	List<HomeResultDto> getInterList(String selectedDongCode, int year, int month) throws SQLException;
+	List<HomeResultDto> getKeywordHomeList(String keyword) throws SQLException;
 
+//	List<HomeResultDto> getInterList(String selectedDongCode, int year, int month) throws SQLException;
+	
 }

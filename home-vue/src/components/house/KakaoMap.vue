@@ -47,7 +47,7 @@ export default {
             // 마커를 생성하고 지도위에 표시하는 함수입니다
         addMarker(position, aptName) {
             // 마커를 생성합니다
-            console.log(position)
+            // console.log(position)
             var marker = new window.kakao.maps.Marker({
                 position: position,
             });
@@ -89,7 +89,7 @@ export default {
     },
     watch:{
         houses : function(newHouse) {
-            console.log(newHouse)
+            // console.log(newHouse)
             // //기존 마커 지우기
             this.removeMarker();
             //바운드 객체
@@ -97,8 +97,8 @@ export default {
 
             if (newHouse.length != 0){
                 // console.log("sear",this.searchInfo)
-                const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
-                console.log(area)
+                // const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
+                // console.log(area)
 
                 //그리기
                 //초기화

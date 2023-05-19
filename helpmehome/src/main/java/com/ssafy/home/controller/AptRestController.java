@@ -105,6 +105,23 @@ public class AptRestController {
 			return exceptionHandling(e);
 		}
 	}
+	
+	//집 키워드 검색 : 전체 지도에서 키워드 검색
+	@GetMapping("/apt/{keyword}")
+	public ResponseEntity<?> searchKeywordHome(@PathVariable String keyword){
+		System.out.println("controller " + keyword);
+		try {
+			List<HomeResultDto> homeList = aptService.getKeywordHomeList(keyword);
+			if(homeList != null && !homeList.isEmpty()) {
+//				System.out.println(homeList);
+				return new ResponseEntity<List<HomeResultDto>>(homeList, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 
 	//관리자 기능) 집 거래 정보 삭제 : 파라미터 개선 필요
 //	@DeleteMapping(value = "/apt/{apartmentName}/{floor}/{area}/{dongName}/{dealAmount}/{roadName}")

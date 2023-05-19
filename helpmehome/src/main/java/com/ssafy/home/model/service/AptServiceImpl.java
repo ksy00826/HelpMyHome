@@ -176,6 +176,11 @@ public class AptServiceImpl implements AptService{
 		return mapper.getSidoDealInfo();
 	}
 
+	@Override
+	public List<HomeResultDto> getKeywordHomeList(String keyword) throws SQLException {
+		return mapper.getKeywordHomeList(keyword);
+	}
+
 //	@Override
 //	public String getDongCode(String curSido, String curGugun, String curDong) throws SQLException {
 //		return dao.getDongCode(curSido, curGugun, curDong);

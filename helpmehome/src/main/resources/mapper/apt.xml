@@ -52,4 +52,11 @@
 		from housedeal
 		group by dealYear;
 	</select>
+	<select id="getKeywordHomeList" parameterType="String" resultType="homeResultDto">
+		select hi.aptCode, hi.buildYear, hi.apartmentName, hd.floor, hd.area, hi.dongCode, dc.dongName, hd.dealamount, hi.lng, hi.lat
+		from dongcode dc
+		join houseinfo hi on dc.dongCode = hi.dongCode
+		join housedeal hd on hi.aptCode = hd.aptCode
+		where hi.apartmentName like CONCAT("%", #{keyword}, "%");
+	</select>
 </mapper>

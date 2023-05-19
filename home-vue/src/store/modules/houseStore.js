@@ -147,6 +147,19 @@ export default {
                         dongName: payload.dongName,
                     })
                 })
+        },
+        getKeywordHouseList({commit}, keyword){
+            console.log(keyword);
+            http
+                .get(`/apt/${keyword}`)
+                .then(({data})=>{
+                    console.log(data);
+                    commit({
+                        type: "SET_HOUSE_LIST",
+                        houses: data,
+                    })
+                })
         }
+        
     },
 }
