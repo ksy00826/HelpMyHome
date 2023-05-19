@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <the-header-navbar></the-header-navbar>
-    <router-view />
-
+    <div class="content">
+      <router-view />
+    </div>
     <the-footer></the-footer>
   </div>
 </template>
@@ -42,6 +43,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  
+  background-image: url("@/assets/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
+  background-size : 100% 40%;
 }
 
 nav {
@@ -56,4 +64,13 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.content{
+  margin: 90px 100px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 2em;
+  box-shadow: 0px 0px 20px 0px rgb(240, 240, 240);
+}
+
 </style>

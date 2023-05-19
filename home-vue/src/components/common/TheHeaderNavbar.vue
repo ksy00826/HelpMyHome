@@ -91,12 +91,6 @@
     
     <!-- Masthead-->
     <header class="masthead">
-      <div class="container">
-        <div class="masthead-subheading">구해줘 Home</div>
-        <div class="masthead-heading text-uppercase">우리를 위한 집</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services">SERVICE </a>
-    
-      </div>
     </header>
 
     <!--modal-->
@@ -165,15 +159,9 @@ export default {
 <style scoped>
 
 header.masthead {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
+  padding: 100px;
   text-align: center;
   color: #fff;
-  background-image: url("@/assets/header-bg.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: cover;
 }
 </style>
 
