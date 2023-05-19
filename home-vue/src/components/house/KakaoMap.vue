@@ -51,29 +51,29 @@ export default {
             console.log(position)
             var marker = new window.kakao.maps.Marker({
                 position: position,
-                title: aptName,
             });
-            var infowindow = new kakao.maps.InfoWindow({
-                content: aptName,
-            })
-            
+            var customOverlay = new kakao.maps.CustomOverlay({
+                position: marker.getPosition(),   
+                content: `<div class ="label"><span class="left"></span><span class="center">${aptName}</span><span class="right"></span></div>`,
+                yAnchor: 2,
+            });
             marker.setMap(this.map)
-            kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, marker, infowindow));
-            kakao.maps.event.addListener(marker, 'mouseout', this.makeOutListener(infowindow));
+            kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, customOverlay));
+            kakao.maps.event.addListener(marker, 'mouseout', this.makeOutListener(customOverlay));
 
             // 생성된 마커를 배열에 추가합니다
             this.markers.push(marker);
         },// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-        makeOverListener(map, marker, infowindow) {
+        makeOverListener(map, customOverlay) {
             return function() {
-                infowindow.open(map, marker);
+                customOverlay.setMap(map)
             };
         },
 
         // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-        makeOutListener(infowindow) {
+        makeOutListener(customOverlay) {
             return function() {
-                infowindow.close();
+                customOverlay.setMap(null);
             };
         },
         removeMarker(){
@@ -90,8 +90,6 @@ export default {
         houses : function(newHouse) {
             console.log(newHouse)
             // //기존 마커 지우기
-            // if (this.marker != null) this.marker.setMap(null);
-            // this.loadMap() //임시로 지도 재생성으로 함
             this.removeMarker();
 
             if (newHouse.length != 0){
@@ -121,9 +119,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #map{
     width: 100%;
     height: 400px;
+}
+.label{
+    padding: 5px 10px;
+    background-color: white;
+    border-color: black;
+    -webkit-border-radius:15px;
+    color: black;
 }
 </style>
