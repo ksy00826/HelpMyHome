@@ -1,6 +1,7 @@
 <template>
     <b-container>
-        <b-card no-body>
+        <b-card 
+            title="연도별 매매 거래량">
             <!-- <b-tabs v-for="(sido, index) in sidos" :key="index">
                 <b-tab :title="sido">
                 </b-tab>
@@ -9,12 +10,14 @@
                 <b-button  v-for="(sido, index) in sidos" :key="index"
                 @click="changeGraph(sido)">{{ sido }}</b-button>
             </b-button-group> -->
-            <Bar
-                v-if="loaded"
-                id="my-chart-id"
-                :options="chartOptions"
-                :data="chartData"
-            />
+            <div >
+                <Bar
+                    v-if="loaded"
+                    id="my-chart-id"
+                    :options="chartOptions"
+                    :data="chartData"
+                />
+            </div>
         </b-card>
         <div>
             <img :src="imageSrc">
@@ -25,10 +28,10 @@
 <script>
 import http from "@/api/http";
 import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors } from 'chart.js'
 // import { mapGetters } from "vuex";
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Colors, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
     name: 'MainAptGraph',
@@ -44,23 +47,24 @@ export default {
                 datasets: [ { 
                     data: [40, 20, 12],
                     label: '연도별 매매 거래 수',
-                    backgroundColor: '#f87979',
-                } ] //dealcnt
+                    // backgroundColor: '#f87979',
+                    borderColor: '#36A2EB',
+                    backgroundColor: '#9BD0F5',
+                } ], //dealcnt
             },
             
             chartOptions: {
                 responsive: true,
+                color: '#f87979',
             },
             sidoDealInfo: [],
         }
     },
-    created() {
+    mounted() {
         if (this.sidoDealInfo.length == 0) {
             this.getAptDealData();
         }
 
-    },
-    async mounted(){
     },
     methods: {
         getAptDealData(){
