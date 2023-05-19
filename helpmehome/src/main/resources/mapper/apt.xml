@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="getHomeList" parameterType="homeInfoDto" resultType="homeResultDto">
-		select hi.apartmentName, hd.floor, hd.area, dc.dongName, hd.dealamount, hi.roadName
+		select hi.aptCode, hi.buildYear, hi.apartmentName, hd.floor, hd.area, hi.dongCode, dc.dongName, hd.dealamount, hi.lng, hi.lat
 		from dongcode dc
 		join houseinfo hi on dc.dongCode = hi.dongCode
 		join housedeal hd on hi.aptCode = hd.aptCode

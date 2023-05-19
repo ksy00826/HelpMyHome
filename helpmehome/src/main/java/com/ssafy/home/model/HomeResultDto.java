@@ -2,24 +2,48 @@ package com.ssafy.home.model;
 
 public class HomeResultDto {
 
+	private String aptCode;
+	private String buildYear;
 	private String apartmentName;
 	private String floor;
 	private String area;
+	private String dongCode;
 	private String dongName;
 	private String dealAmount;
-	private String roadName;
+	private String lng;
+	private String lat;
 	
 	public HomeResultDto() {}
 
-	public HomeResultDto(String apartmentName, String floor, String area, String dongName, String dealAmount,
-			String roadName) {
+	public HomeResultDto(String aptCode, String buildYear, String apartmentName, String floor, String area,
+			String dongCode, String dongName, String dealAmount, String lng, String lat) {
 		super();
+		this.aptCode = aptCode;
+		this.buildYear = buildYear;
 		this.apartmentName = apartmentName;
 		this.floor = floor;
 		this.area = area;
+		this.dongCode = dongCode;
 		this.dongName = dongName;
 		this.dealAmount = dealAmount;
-		this.roadName = roadName;
+		this.lng = lng;
+		this.lat = lat;
+	}
+
+	public String getAptCode() {
+		return aptCode;
+	}
+
+	public void setAptCode(String aptCode) {
+		this.aptCode = aptCode;
+	}
+
+	public String getBuildYear() {
+		return buildYear;
+	}
+
+	public void setBuildYear(String buildYear) {
+		this.buildYear = buildYear;
 	}
 
 	public String getApartmentName() {
@@ -46,6 +70,14 @@ public class HomeResultDto {
 		this.area = area;
 	}
 
+	public String getDongCode() {
+		return dongCode;
+	}
+
+	public void setDongCode(String dongCode) {
+		this.dongCode = dongCode;
+	}
+
 	public String getDongName() {
 		return dongName;
 	}
@@ -62,19 +94,30 @@ public class HomeResultDto {
 		this.dealAmount = dealAmount;
 	}
 
-	public String getRoadName() {
-		return roadName;
+	public String getLng() {
+		return lng;
 	}
 
-	public void setRoadName(String roadName) {
-		this.roadName = roadName;
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
 	}
 
 	@Override
 	public String toString() {
-		return "HomeResultDto [apartmentName=" + apartmentName + ", floor=" + floor + ", area=" + area + ", dongName="
-				+ dongName + ", dealAmount=" + dealAmount + ", roadName=" + roadName + "]";
+		return "HomeResultDto [aptCode=" + aptCode + ", buildYear=" + buildYear + ", apartmentName=" + apartmentName
+				+ ", floor=" + floor + ", area=" + area + ", dongCode=" + dongCode + ", dongName=" + dongName
+				+ ", dealAmount=" + dealAmount + ", lng=" + lng + ", lat=" + lat + "]";
 	}
+
+	
 
 	
 }

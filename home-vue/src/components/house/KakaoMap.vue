@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// const vueThis = this;
 import { mapGetters } from 'vuex';
 export default {
     name: 'KakaoMap',
@@ -12,7 +13,7 @@ export default {
     data() {
         return {
             map : null,
-            marker: null,
+            markers: [],
         };
     },
     created() {},
@@ -28,7 +29,8 @@ export default {
         loadScript() {
             const script = document.createElement("script");
             script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=74f1e792cc4d7d72169a67ae909e2b50&libraries=services,clusterer,drawing"
-            script.onload = () => window.kakao.maps.load(this.loadMap);
+            /* global kakao */
+            script.onload = () => kakao.maps.load(this.loadMap);
             document.head.appendChild(script);
         },
         loadMap(){
@@ -63,7 +65,26 @@ export default {
                                                 thiz.map.panTo(coords);
                                             }
                                         });
-                                    }
+                                    },
+            // 마커를 생성하고 지도위에 표시하는 함수입니다
+        addMarker(position) {
+            // 마커를 생성합니다
+            console.log(position)
+            var marker = new window.kakao.maps.Marker({
+                position: position
+            });
+            // var marker = new kakao.maps.Marker({
+            //     map: map, // 마커를 표시할 지도
+            //     position: positions[i].latlng, // 마커를 표시할 위치
+            //     title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            //     image : markerImage // 마커 이미지 
+            // });
+            
+            // 생성된 마커를 배열에 추가합니다
+            marker.setMap(this.map)
+            this.markers.push(marker);
+            this.map.panTo(position);
+        }
     },
     computed: {
         ...mapGetters(["houses", "searchInfo"])
@@ -80,8 +101,10 @@ export default {
             this.loadMap() //임시로 지도 재생성으로 함
             //그리기
             newHouse.forEach((house) => {
-                this.drawPicker2(area + " " + house.roadName)
+                // console.log(house)
+                this.addMarker(new window.kakao.maps.LatLng(house.lat, house.lng))
             })
+            this.map.setLevel(5);
         }
     }
 };

@@ -107,23 +107,23 @@ public class AptRestController {
 	}
 
 	//관리자 기능) 집 거래 정보 삭제 : 파라미터 개선 필요
-	@DeleteMapping(value = "/apt/{apartmentName}/{floor}/{area}/{dongName}/{dealAmount}/{roadName}")
-	public ResponseEntity<?> deleteDealInfo(@PathVariable String apartmentName, @PathVariable String floor, @PathVariable String area, 
-											@PathVariable String dongName, @PathVariable String dealAmount, @PathVariable String roadName){
-		try {
-			HomeResultDto removeHomeInfo = new HomeResultDto(apartmentName, floor, area, dongName, dealAmount, roadName);
-			int res = aptService.remove(removeHomeInfo);
-			
-			if(res == 1) {
-				return new ResponseEntity<Void>(HttpStatus.OK);
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			}
-		} catch (Exception e) {
-			return exceptionHandling(e);
-		}
-	}
-	
+//	@DeleteMapping(value = "/apt/{apartmentName}/{floor}/{area}/{dongName}/{dealAmount}/{roadName}")
+//	public ResponseEntity<?> deleteDealInfo(@PathVariable String apartmentName, @PathVariable String floor, @PathVariable String area, 
+//											@PathVariable String dongName, @PathVariable String dealAmount, @PathVariable String roadName){
+//		try {
+//			HomeResultDto removeHomeInfo = new HomeResultDto(apartmentName, floor, area, dongName, dealAmount, roadName);
+//			int res = aptService.remove(removeHomeInfo);
+//			
+//			if(res == 1) {
+//				return new ResponseEntity<Void>(HttpStatus.OK);
+//			} else {
+//				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+//			}
+//		} catch (Exception e) {
+//			return exceptionHandling(e);
+//		}
+//	}
+//	
 	//////interest : C, R
 	
 	
