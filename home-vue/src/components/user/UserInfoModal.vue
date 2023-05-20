@@ -119,12 +119,13 @@ export default {
         let loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
         console.log(loginUser);
         console.log(typeof(loginUser))
-        
-        this.id = loginUser.id;
-        this.pw = loginUser.pw;
-        this.name = loginUser.name;
-        this.addr = loginUser.addr;
-        this.phone = loginUser.phone;
+        if (loginUser != null){
+            this.id = loginUser.id;
+            this.pw = loginUser.pw;
+            this.name = loginUser.name;
+            this.addr = loginUser.addr;
+            this.phone = loginUser.phone;
+        }
         
     },
     methods: {
