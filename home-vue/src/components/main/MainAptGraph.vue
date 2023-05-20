@@ -19,9 +19,9 @@
                 />
             </div>
         </b-card>
-        <div>
+        <!-- <div>
             <img :src="imageSrc">
-        </div>
+        </div> -->
     </b-container>
 </template>
 

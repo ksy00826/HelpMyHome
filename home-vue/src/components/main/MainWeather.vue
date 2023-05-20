@@ -107,7 +107,7 @@ export default {
           for (var m = 0; m < number; m++) {
             this.idx.push(m);
           }
-          console.log(this.weather);
+          // console.log(this.weather);
         });
     },
   },

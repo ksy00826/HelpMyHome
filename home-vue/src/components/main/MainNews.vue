@@ -2,9 +2,10 @@
   <b-container>
     <b-card title="부동산 핫이슈">
       <div>
+        <!-- v-model="slide" 일단 뻄 -->
         <b-carousel
           id="carousel-1"
-          v-model="slide"
+          
           :interval="4000"
           controls
           indicators
@@ -12,23 +13,24 @@
           style="text-shadow: 1px 1px 2px #333"
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd">
-          <b-carousel-slide
-            class="idx"
-            v-for="i in idx"
-            :key="i"
-            :img-src="image[i]"
-            @click="moveimg(info[i])">
-            <!-- 이미지 클릭 (미동작) -->
-            <a
-              class="mt-4"
-              style="position: absolute; top: -310px; font-size: 24px"
-              :href="info[i]"
-              >{{ title[i].substr(0, 30) }}...</a
-            >
+          <div v-if="loaded">
+            <b-carousel-slide
+              class="idx"
+              v-for="i in idx"
+              :key="i"
+              :img-src="image[i]"
+              @click="moveimg(info[i])">
+              <!-- 이미지 클릭 (미동작) -->
+              <a
+                class="mt-4"
+                style="position: absolute; top: -310px; font-size: 24px"
+                :href="info[i]"
+                >{{ title[i].substr(0, 30) }}...</a>
 
-            {{ content[i].substr(0, 45) }}...
-            <br />
-          </b-carousel-slide>
+              {{ content[i].substr(0, 45) }}...
+              <br />
+            </b-carousel-slide>
+          </div>
         </b-carousel>
 
         <!-- <p class="mt-4">
@@ -58,7 +60,7 @@ export default {
       idx: [0, 1, 2, 3, 4],
     };
   },
-  created() {
+  async created() {
     this.loaded = false;
     this.getData();
   },
@@ -120,7 +122,7 @@ export default {
           }
 
           // console.log(this.weather);
-          console.log("image", this.image);
+          console.log("title", this.title);
           this.loaded = true;
         });
     },

@@ -20,23 +20,23 @@
 						<div class="mb-3">
 							<i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
 							<label for="question" class="form-label">아이디 * :</label> <input
-								type="text" class="form-control" id="signId" name="signId" />
+								type="text" class="form-control" name="signId" />
 						</div>
 						<div class="mb-3">
 							<i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
 							<label for="question" class="form-label">이름 * :</label> <input
-								type="text" class="form-control" id="signName"
+								type="text" class="form-control"
 								placeholder="User name" name="signName" />
 						</div>
 						<div class="mb-3">
 							<i class="bi bi-patch-question" style="color: rgb(121, 2, 119)"></i>
 							<label for="question" class="form-label">전화번호 * :</label> <input
-								type="text" class="form-control" id="signPhone"
+								type="text" class="form-control"
 								placeholder="010-xxxx-xxxx" name="signPhone" />
 						</div>
 
 						<div class="modal-footer">
-							<button type="submit" id="btn-info-create"
+							<button type="submit" id="btn-info-search"
 								class="btn btn-primary btn-sm">찾기</button>
 						</div>
 					</form>

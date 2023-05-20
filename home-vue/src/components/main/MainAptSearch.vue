@@ -2,9 +2,9 @@
   <b-container>
     <b-card title="매물 찾기">
       <div>
+        <!-- v-model="slide"  일단뺌-->
         <b-carousel
           id="carousel-1"
-          v-model="slide"
           :interval="3000"
           controls
           indicators
@@ -143,7 +143,7 @@ export default {
           }
 
           // console.log(this.weather);
-          console.log("image", this.image);
+          // console.log("image", this.image);
           this.loaded = true;
         });
     },
