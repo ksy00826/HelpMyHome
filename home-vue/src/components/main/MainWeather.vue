@@ -7,25 +7,25 @@
             <th>온도</th>
             <td
               class="temperature"
-              v-for="Temperature in Temperature"
-              :key="Temperature">
-              {{ Temperature }}
+              v-for="(Temp, i) in Temperature"
+              :key="i">
+              {{ Temp }}
             </td>
           </tr>
           <tr class="detail">
             <th>날씨</th>
             <td
               class="weather"
-              v-for="index in idx"
-              :key="index"
+              v-for="(index, i) in idx"
+              :key="i"
               :class="weather_img[index]">
               {{ weather[index] }}
             </td>
           </tr>
           <tr class="detail">
             <th>시간</th>
-            <td class="time" v-for="time in time" :key="time">
-              {{ time }}
+            <td class="time" v-for="(t, i) in time" :key="i">
+              {{ t }}
             </td>
           </tr>
         </table>
