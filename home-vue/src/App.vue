@@ -68,10 +68,10 @@ nav a.router-link {
 
 .content{
   margin: 90px 100px;
-  padding: 10px;
+  padding: 30px;
   background-color: white;
-  border-radius: 2em;
-  box-shadow: 0px 0px 20px 5px rgb(240, 240, 240);
+  border-radius: 1em;
+  box-shadow: 0px 0px 10px 0px rgb(240, 240, 240);
 }
 
 </style>

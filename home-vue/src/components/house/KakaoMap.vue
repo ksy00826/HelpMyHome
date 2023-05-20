@@ -118,7 +118,7 @@ export default {
 <style>
 #map{
     width: 100%;
-    height: 400px;
+    height: 500px;
 }
 .label{
     padding: 5px 10px;

@@ -1,6 +1,6 @@
 <template>
 	<!-- Services-->
-		<div class="container">
+		<div>
 			<div class="text-center">
 				<h3 class="underline-hotpink">아파트 매매정보</h3>
 			</div>
@@ -14,6 +14,9 @@
 					</b-col>
 				</b-row>
 				<kakao-map></kakao-map>
+				<b-row>
+					<house-card-list></house-card-list>
+				</b-row>
 			</b-card>
 			<!-- <house-list></house-list> -->
 		</div>
@@ -24,6 +27,7 @@ import KakaoMap from "@/components/house/KakaoMap.vue"
 import HouseSearchBar from '@/components/house/HouseSearchBar';
 // import HouseList from '@/components/house/HouseList.vue';
 import HouseKeywordSearch from "@/components/house/HouseKeywordSearch.vue";
+import HouseCardList from "@/components/house/HouseCardList.vue";
 
 export default {
   name: "AppHouse",
@@ -41,6 +45,7 @@ export default {
 	HouseSearchBar,
 	// HouseList,
 	HouseKeywordSearch,
+	HouseCardList,
   },
   method: {
   }
