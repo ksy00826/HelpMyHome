@@ -26,51 +26,58 @@
     
     
     <!--네비게이션-->
-    <b-navbar toggleable="sm" type="light" variant="light">
-      <b-navbar-brand><router-link :to="{name : 'main'}" class="link">구해줘 HOME</router-link></b-navbar-brand>
+    <b-navbar toggleable="lg" type="light" class="fixed-top">
+      <b-container>
+        <b-navbar-brand>
+          <router-link :to="{name : 'main'}" class="nav-link">
+            <!-- <img src="https://www.flaticon.com/free-icons/real-estate.png" class="d-inline-block align-top" alt="home"> -->
+            <b-icon icon="house" aria-hidden="true"></b-icon>
+            구해줘 HOME
+          </router-link>
+        </b-navbar-brand>
 
+        <!--토글 목록-->
+        <!-- Right aligned nav items -->
+        <b-collapse id="nav-text-collapse" is-nav>
+          <!--비회원-->
+          <div id="noUserStorage" style="display:" class="ml-auto">
+            <b-navbar-nav>
+              <!--부동산 정보 및 게시판 라우터 링크-->
+              <b-nav-text><router-link :to="{name : 'house'}" class="nav-link">부동산</router-link></b-nav-text>
+              <b-nav-text><router-link :to="{name : 'board'}" class="nav-link">게시판</router-link></b-nav-text>
+              <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#userInModal">회원가입</a></b-nav-text>
+              <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#login">로그인</a></b-nav-text>
+              <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#findPw">비밀번호찾기</a></b-nav-text>
+            </b-navbar-nav>
+          </div>
+          
+          <!--회원-->
+          <div id="UserStorage" style="display: none">
+            <b-navbar-nav>
+              <!--부동산 정보 및 게시판 라우터 링크-->
+              <b-nav-text><router-link :to="{name : 'house'}" class="nav-link">부동산</router-link></b-nav-text>
+              <b-nav-text><router-link :to="{name : 'board'}" class="nav-link">게시판</router-link></b-nav-text>
+              <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#info">회원정보</a></b-nav-text>
+              <b-nav-text><a class="nav-link" href="#" @click="logout()">로그아웃</a></b-nav-text>
+            </b-navbar-nav>
+          </div>
+                        <!-- 관리자 기능
+                <li class="nav-item"><a class="nav-link"
+                  href="${root}/user?cmd=goAdminPage">회원정보관리</a></li>
+                <li class="nav-item"><a class="nav-link"
+                  href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li>  -->
 
+        </b-collapse>
 
-      <!--토글 목록-->
-      <!-- Right aligned nav items -->
-      <b-collapse id="nav-text-collapse" is-nav>
-        <!--비회원-->
-        <div id="noUserStorage" style="display:" class="ml-auto">
-          <b-navbar-nav>
-             <!--부동산 정보 및 게시판 라우터 링크-->
-            <b-nav-text><router-link :to="{name : 'house'}" class="nav-link">부동산</router-link></b-nav-text>
-            <b-nav-text><router-link :to="{name : 'board'}" class="nav-link">게시판</router-link></b-nav-text>
-            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#userInModal">회원가입</a></b-nav-text>
-            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#login">로그인</a></b-nav-text>
-            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#findPw">비밀번호찾기</a></b-nav-text>
-          </b-navbar-nav>
-        </div>
-        
-        <!--회원-->
-        <div id="UserStorage" style="display: none">
-          <b-navbar-nav>
-             <!--부동산 정보 및 게시판 라우터 링크-->
-            <b-nav-text><router-link :to="{name : 'house'}" class="nav-link">부동산</router-link></b-nav-text>
-            <b-nav-text><router-link :to="{name : 'board'}" class="nav-link">게시판</router-link></b-nav-text>
-            <b-nav-text><a class="nav-link" href="#" data-toggle="modal" data-target="#info">회원정보</a></b-nav-text>
-            <b-nav-text><a class="nav-link" href="#" @click="logout()">로그아웃</a></b-nav-text>
-          </b-navbar-nav>
-        </div>
-                       <!-- 관리자 기능
-              <li class="nav-item"><a class="nav-link"
-                href="${root}/user?cmd=goAdminPage">회원정보관리</a></li>
-              <li class="nav-item"><a class="nav-link"
-                href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li>  -->
+        <!--토글 버튼-->
+        <b-navbar-toggle target="nav-text-collapse">
+          <template #default="{ expanded }">
+            <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
+            <b-icon v-else icon="chevron-bar-down"></b-icon>
+          </template>
+        </b-navbar-toggle>
 
-      </b-collapse>
-
-      <!--토글 버튼-->
-      <b-navbar-toggle target="nav-text-collapse">
-        <template #default="{ expanded }">
-          <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
-          <b-icon v-else icon="chevron-bar-down"></b-icon>
-        </template>
-      </b-navbar-toggle>
+      </b-container>
     </b-navbar>
 
     
