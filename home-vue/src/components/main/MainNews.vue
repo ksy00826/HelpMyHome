@@ -122,7 +122,7 @@ export default {
           }
 
           // console.log(this.weather);
-          console.log("title", this.title);
+          // console.log("title", this.title);
           this.loaded = true;
         });
     },

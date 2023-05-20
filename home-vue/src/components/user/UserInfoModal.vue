@@ -117,8 +117,8 @@ export default {
     },
     created() {
         let loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
-        console.log(loginUser);
-        console.log(typeof(loginUser))
+        console.log("현재 login user: " + loginUser);
+        // console.log(typeof(loginUser))
         if (loginUser != null){
             this.id = loginUser.id;
             this.pw = loginUser.pw;
