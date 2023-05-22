@@ -6,11 +6,11 @@ import com.ssafy.home.model.Comment;
 
 public interface CommentService {
 
-	List<Comment> list(String article);
+	List<Comment> list(int articleno);
 
-	boolean create(Comment comment);
+	boolean create(Comment commentDto);
 
-	boolean modify(Comment comment);
+	boolean modify(Comment commentDto);
 
 	boolean delete(int commentNo);
 

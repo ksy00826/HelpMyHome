@@ -10,12 +10,12 @@ public class Comment {
 	private int commentNo;
 	@ApiModelProperty(value = "작성자이름")
 	private String userName;
-	@ApiModelProperty(value = "댓글")
+	@ApiModelProperty(value = "도서평")
 	private String comment;
 	@ApiModelProperty(value = "작성시각")
 	private String commentTime;
-	@ApiModelProperty(value = "게시번호", example = "1")
-	private String articleno;
+	@ApiModelProperty(value = "글번호", example="1")
+	private int articleno;
 
 	public int getCommentNo() {
 		return commentNo;
@@ -49,11 +49,11 @@ public class Comment {
 		this.commentTime = commentTime;
 	}
 
-	public String getArticleno() {
+	public int getArticleno() {
 		return articleno;
 	}
 
-	public void setArticleno(String articleno) {
+	public void setArticleno(int articleno) {
 		this.articleno = articleno;
 	}
 

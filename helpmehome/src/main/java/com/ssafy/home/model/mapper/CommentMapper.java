@@ -6,7 +6,7 @@ import com.ssafy.home.model.Comment;
 
 public interface CommentMapper {
 
-	List<Comment> list(String article);
+	List<Comment> list(int articleno);
 
 	int create(Comment commentDto);
 

@@ -23,7 +23,7 @@ import com.ssafy.home.model.service.CommentService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/commentapi")
+@RequestMapping("/home")
 public class CommentRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommentRestController.class);
@@ -31,9 +31,9 @@ public class CommentRestController {
 	@Autowired
 	private CommentService commentService;
 
-	@ApiOperation(value = "articleno에 해당하는 게시글 목록을 반환한다.", response = List.class)
+	@ApiOperation(value = "articleno에 해당하는 댓글 목록을 반환한다.", response = List.class)
 	@GetMapping("/comment/{articleno}")
-	public ResponseEntity<?> listComment(@PathVariable("articleno") String articleno) {
+	public ResponseEntity<?> listComment(@PathVariable("articleno") int articleno) {
 		logger.debug("listComment - 호출");
 
 		try {
@@ -47,11 +47,11 @@ public class CommentRestController {
 
 	@ApiOperation(value = "새로운 댓글을 입력한다.", response = String.class)
 	@PostMapping("/comment")
-	public ResponseEntity<?> createComment(@RequestBody Comment comment) {
+	public ResponseEntity<?> createComment(@RequestBody Comment commentDto) {
 		logger.debug("createComment - 호출");
 
 		try {
-			boolean isWrite = commentService.create(comment);
+			boolean isWrite = commentService.create(commentDto);
 
 			if (isWrite) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
@@ -67,12 +67,12 @@ public class CommentRestController {
 
 	@ApiOperation(value = "글번호가 commentNo에 해당하는 댓글을 수정한다.", response = String.class)
 	@PutMapping("/comment/{commentNo}")
-	public ResponseEntity<?> modifyComment(@PathVariable("commentNo") int commentNo, @RequestBody Comment comment) {
+	public ResponseEntity<?> modifyComment(@PathVariable("commentNo") int commentNo, @RequestBody Comment commentDto) {
 		logger.debug("modifyComment - 호출");
 
 		try {
-			comment.setCommentNo(commentNo);
-			boolean isModify = commentService.modify(comment);
+			commentDto.setCommentNo(commentNo);
+			boolean isModify = commentService.modify(commentDto);
 
 			if (isModify) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
@@ -86,7 +86,7 @@ public class CommentRestController {
 		}
 	}
 
-	@ApiOperation(value = "글번호가 commentNo에 해당하는 도서평을 삭제한다.", response = String.class)
+	@ApiOperation(value = "글번호가 commentNo에 해당하는 댓글을 삭제한다.", response = String.class)
 	@DeleteMapping("/comment/{commentNo}")
 	public ResponseEntity<?> deleteComment(@PathVariable("commentNo") int commentNo) {
 		logger.debug("deleteComment - 호출");
