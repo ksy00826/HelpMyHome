@@ -14,8 +14,10 @@
         </b-col>
       </b-row>
       <kakao-map></kakao-map>
+    </b-card>
+    <b-card>
       <b-row>
-        <!-- <house-card-list></house-card-list> -->
+        <house-card-list></house-card-list>
       </b-row>
     </b-card>
     <!-- <house-list></house-list> -->
@@ -27,7 +29,7 @@ import KakaoMap from "@/components/house/KakaoMap.vue";
 import HouseSearchBar from "@/components/house/HouseSearchBar";
 // import HouseList from '@/components/house/HouseList.vue';
 import HouseKeywordSearch from "@/components/house/HouseKeywordSearch.vue";
-// import HouseCardList from "@/components/house/HouseCardList.vue";
+import HouseCardList from "@/components/house/HouseCardList.vue";
 
 export default {
   name: "AppHouse",
@@ -45,7 +47,7 @@ export default {
     HouseSearchBar,
     // HouseList,
     HouseKeywordSearch,
-    // HouseCardList,
+    HouseCardList,
   },
   method: {},
 };

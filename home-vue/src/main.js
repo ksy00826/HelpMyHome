@@ -10,10 +10,13 @@ import "@/api/vueBootstrap.js";
 // import 'expose-loader?$!expose-loader?jQuery!jquery'
 import 'bootstrap'
 
+import vuetify from './plugins/vuetify'
+
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
