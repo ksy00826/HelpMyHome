@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import http from "@/api/http";
 
 export default {
@@ -63,6 +64,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["comments", "article"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -73,6 +75,13 @@ export default {
     http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
       this.article = data;
     });
+    // this.getBoard({
+    //   articleno,
+    // });
+
+    // this.getComments({
+    //   articleno,
+    // });
   },
   methods: {
     moveModifyArticle() {

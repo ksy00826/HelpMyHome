@@ -27,6 +27,14 @@ export default {
   },
 
   actions: {
+    getBoard(context, payload) {
+      http.get(`/board/${payload.articleno}`).then((response) => {
+        context.commit({
+          type: "ARTICLE",
+          book: response.data,
+        });
+      });
+    },
     deleteComment(context, payload) {
       http
         .delete(`/comment/${payload.commentNo}`)
