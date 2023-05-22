@@ -15,9 +15,12 @@ export default {
             map : null,
             markers: [],
             bounds: null, //지도의 영역 범위 재설정을 위한 변수
+            selectedMarker: null, //마커 클릭
         };
     },
-    created() {},
+    created() {
+        this.vueThis = this;
+    },
     mounted(){
         if(window.kakao && window.kakao.maps){
             this.loadMap();
@@ -51,20 +54,33 @@ export default {
             var marker = new window.kakao.maps.Marker({
                 position: position,
             });
+            marker.setMap(this.map)
+
+            //이벤트 등록
+            //아파트 이름 커스텀 오버레이 이벤트 등록
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: marker.getPosition(),   
                 content: `<div class ="label"><span class="left"></span><span class="center">${aptName}</span><span class="right"></span></div>`,
                 yAnchor: 2,
             });
-            marker.setMap(this.map)
             kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, customOverlay));
             kakao.maps.event.addListener(marker, 'mouseout', this.makeOutListener(customOverlay));
+
+            //클릭 이벤트 등록
+            const vueThis = this;
+            kakao.maps.event.addListener(marker, 'click', function() {
+                // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
+                vueThis.selectedMarker = marker;
+                vueThis.map.panTo(marker.getPosition()); //panTo 함수 못찾은거.. this 문제 ㅠㅠ
+            });
 
             // 생성된 마커를 배열에 추가합니다
             this.markers.push(marker);
             //바운드 배열에도 위치를 추가
             this.bounds.extend(position);
         },// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+
+
         makeOverListener(map, customOverlay) {
             return function() {
                 customOverlay.setMap(map)
