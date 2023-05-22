@@ -13,6 +13,21 @@ export default {
         guguns: [{ value: null, text: "구군이름" }],
         dongs: [{ value: null, text: "동이름"}],
         houses: [], //리스트 뿌리기
+        /*
+        apartmentName
+        aptCode
+        area
+        buildYear
+        dealAmount
+        dongCode
+        dongName
+        floor
+        lat
+        "35.8679958025653"
+        lng
+        "128.636957686169"
+        */
+        house: null,
         years: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
         months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         searchInfo: {
@@ -20,7 +35,6 @@ export default {
             gugunName: null,
             dongName: null,
         },
-        // house: null, 
     },
     getters: {
         dongcodes(state){
@@ -46,6 +60,9 @@ export default {
         },
         searchInfo(state){
             return state.searchInfo;
+        },
+        house(state){
+            return state.house;
         }
     },
     mutations: {
@@ -104,6 +121,9 @@ export default {
                 gugunName: payload.gugunName,
                 dongName: payload.dongName,
             }
+        },
+        SET_HOUSE(state, payload){
+            state.house = payload.house;
         }
     },
     actions: {
@@ -159,6 +179,13 @@ export default {
                         houses: data,
                     })
                 })
+        },
+        setHouse({commit}, house){
+            console.log("store: " + house);
+            commit({
+                type: "SET_HOUSE",
+                house: house,
+            })
         }
         
     },

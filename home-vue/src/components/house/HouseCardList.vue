@@ -72,9 +72,9 @@
                       <v-btn
                         color="deep-purple lighten-2"
                         text
-                        @click="reserve"
+                        @click="goMap(house)"
                       >
-                        Reserve
+                        Go Map
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -84,7 +84,7 @@
     </v-container>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
   export default {
     name: "HouseCardList",
     // template: '#app-template',
@@ -99,8 +99,11 @@
       }
     },
     methods: {
-      reserve () {
+      ...mapActions(["setHouse"]),
+      goMap(house) {
         this.loading = true
+
+        this.setHouse(house)
 
         setTimeout(() => (this.loading = false), 2000)
       },
@@ -108,14 +111,14 @@
     computed: {
       ...mapGetters(["houses"]),
     },
-    watch: {
-      houses(newHouse){
-        console.log("new" + newHouse)
-        newHouse.forEach((house) => {
-          console.log(house); 
-        })
-      }
-    }
+    // watch: {
+    //   houses(newHouse){
+    //     console.log("new" + newHouse)
+    //     newHouse.forEach((house) => {
+    //       console.log(house); 
+    //     })
+    //   }
+    // }
   }
 
 

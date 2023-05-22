@@ -101,16 +101,16 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["houses", "searchInfo"])
+        ...mapGetters(["houses", "searchInfo", "house"])
     },
     watch:{
         houses : function(newHouse) {
-            // console.log(newHouse)
+            console.log(newHouse)
             // //기존 마커 지우기
             this.removeMarker();
             //바운드 객체
             this.bounds = new kakao.maps.LatLngBounds();
-            console.log("newHouse: " +newHouse + typeof(newHouse)) //string
+            // console.log("newHouse: " +newHouse + typeof(newHouse)) //string
             if (newHouse.length != 0){//.length != 0 && newHouse != undefined && newHouse != null && newHouse
                 // console.log("sear",this.searchInfo)
                 // const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
@@ -126,6 +126,11 @@ export default {
                 })
                 this.map.setBounds(this.bounds); //지도 영역 재지정
             }
+        },
+        house: function(newHouse){
+            // this.map.panTo()
+            console.log(newHouse);
+            this.map.panTo(new window.kakao.maps.LatLng(newHouse.lat, newHouse.lng));
         }
     }
 };
