@@ -26,7 +26,7 @@
     
     
     <!--네비게이션-->
-    <b-navbar toggleable="lg" type="light" class="fixed-top">
+    <b-navbar toggleable="lg" type="light" class="fixed-top" variant="white" id="navbar">
       <b-container>
         <b-navbar-brand>
           <router-link :to="{name : 'main'}" class="nav-link">
@@ -35,6 +35,15 @@
             구해줘 HOME
           </router-link>
         </b-navbar-brand>
+
+        <!--토글 버튼-->
+        <b-navbar-toggle target="nav-text-collapse">
+          <template #default="{ expanded }">
+            <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
+            <b-icon v-else icon="chevron-bar-down"></b-icon>
+          </template>
+        </b-navbar-toggle>
+
 
         <!--토글 목록-->
         <!-- Right aligned nav items -->
@@ -69,13 +78,6 @@
 
         </b-collapse>
 
-        <!--토글 버튼-->
-        <b-navbar-toggle target="nav-text-collapse">
-          <template #default="{ expanded }">
-            <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
-            <b-icon v-else icon="chevron-bar-down"></b-icon>
-          </template>
-        </b-navbar-toggle>
 
       </b-container>
     </b-navbar>
@@ -154,6 +156,11 @@ header.masthead {
   padding: 100px;
   text-align: center;
   color: #fff;
+}
+
+#navbar{
+  
+  box-shadow: 0px 0px 20px 0px rgb(240, 240, 240);
 }
 </style>
 
