@@ -55,7 +55,7 @@ export default {
                 position: position,
             });
             marker.setMap(this.map)
-
+            console.log(aptName)
             //이벤트 등록
             //아파트 이름 커스텀 오버레이 이벤트 등록
             var customOverlay = new kakao.maps.CustomOverlay({
@@ -66,12 +66,58 @@ export default {
             kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, customOverlay));
             kakao.maps.event.addListener(marker, 'mouseout', this.makeOutListener(customOverlay));
 
-            //클릭 이벤트 등록
+            //클릭 이벤트 등록 : 중심좌표 이동 + 커스텀 오버레이 띄우기
             const vueThis = this;
+            var content = '<div class="overlaybox">' +
+                '    <div class="boxtitle">금주 영화순위</div>' +
+                '    <div class="first">' +
+                '        <div class="triangle text">1</div>' +
+                '        <div class="movietitle text">드래곤 길들이기2</div>' +
+                '    </div>' +
+                '    <ul>' +
+                '        <li class="up">' +
+                '            <span class="number">2</span>' +
+                '            <span class="title">명량</span>' +
+                '            <span class="arrow up"></span>' +
+                '            <span class="count">2</span>' +
+                '        </li>' +
+                '        <li>' +
+                '            <span class="number">3</span>' +
+                '            <span class="title">해적(바다로 간 산적)</span>' +
+                '            <span class="arrow up"></span>' +
+                '            <span class="count">6</span>' +
+                '        </li>' +
+                '        <li>' +
+                '            <span class="number">4</span>' +
+                '            <span class="title">해무</span>' +
+                '            <span class="arrow up"></span>' +
+                '            <span class="count">3</span>' +
+                '        </li>' +
+                '        <li>' +
+                '            <span class="number">5</span>' +
+                '            <span class="title">안녕, 헤이즐</span>' +
+                '            <span class="arrow down"></span>' +
+                '            <span class="count">1</span>' +
+                '        </li>' +
+                '    </ul>' +
+                '</div>';
+            const myContent =
+            `
+            <div></div>
+            `;
+            console.log(myContent)
+            const detailOverlay = new kakao.maps.CustomOverlay({
+                position: marker.getPosition(),
+                content: content,
+                xAnchor: 0.3,
+                yAnchor: 0.91
+            });
             kakao.maps.event.addListener(marker, 'click', function() {
                 // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
                 vueThis.selectedMarker = marker;
                 vueThis.map.panTo(marker.getPosition()); //panTo 함수 못찾은거.. this 문제 ㅠㅠ
+                console.log("선택: " + marker.getPosition())
+                detailOverlay.setMap(vueThis.map); //수정!!
             });
 
             // 생성된 마커를 배열에 추가합니다
