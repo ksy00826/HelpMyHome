@@ -60,11 +60,7 @@
     </b-row>
     <div class="col-md-7 offset-4 mb-2">
       <div class="mt-3">
-        <b-pagination
-          v-model="currentPage"
-          pills
-          :total-rows="rows"
-          size="lg"></b-pagination>
+        <b-pagination size="lg"></b-pagination>
       </div>
     </div>
   </b-container>

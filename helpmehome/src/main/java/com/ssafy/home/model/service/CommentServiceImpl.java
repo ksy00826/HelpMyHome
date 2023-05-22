@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.home.model.Comment;
 import com.ssafy.home.model.mapper.CommentMapper;
+import com.ssafy.home.model.Comment;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired
-	private CommentMapper commentMapper;
+	private CommentMapper commentDao;
 
 	@Override
-	public List<Comment> list(String articleno) {
-		return commentMapper.list(articleno);
+	public List<Comment> list(int articleno) {
+		return commentDao.list(articleno);
 	}
 
 	@Override
-	public boolean create(Comment comment) {
-		return commentMapper.create(comment) == 1;
+	public boolean create(Comment commentDto) {
+		return commentDao.create(commentDto) == 1;
 	}
 
 	@Override
-	public boolean modify(Comment comment) {
-		return commentMapper.modify(comment) == 1;
+	public boolean modify(Comment commentDto) {
+		return commentDao.modify(commentDto) == 1;
 	}
 
 	@Override
 	public boolean delete(int commentNo) {
-		return commentMapper.delete(commentNo) == 1;
+		return commentDao.delete(commentNo) == 1;
 	}
 
 }

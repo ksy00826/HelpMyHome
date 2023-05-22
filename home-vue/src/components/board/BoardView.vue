@@ -36,14 +36,27 @@
         </b-card>
       </b-col>
     </b-row>
+    <comment-write></comment-write>
+    <b-list-group>
+      <comment-row
+        v-for="comment in comments"
+        :key="comment.commentNo"
+        :articleno="article.articleno"
+        :comment="comment"></comment-row>
+    </b-list-group>
   </b-container>
 </template>
 
 <script>
-// import moment from "moment";
+import { mapGetters } from "vuex";
 import http from "@/api/http";
 
 export default {
+  components: {
+    "comment-write": () => import("@/components/board/item/CommentWrite"),
+    "comment-row": () => import("@/components/board/item/CommentRow"),
+  },
+
   name: "BoardDetail",
   data() {
     return {
@@ -51,6 +64,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["comments", "article"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -61,6 +75,13 @@ export default {
     http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
       this.article = data;
     });
+    // this.getBoard({
+    //   articleno,
+    // });
+
+    // this.getComments({
+    //   articleno,
+    // });
   },
   methods: {
     moveModifyArticle() {
@@ -82,11 +103,6 @@ export default {
       this.$router.push({ name: "boardlist" });
     },
   },
-  // filters: {
-  //   dateFormat(regtime) {
-  //     return moment(new Date(regtime)).format("YY.MM.DD hh:mm:ss");
-  //   },
-  // },
 };
 </script>
 
