@@ -25,7 +25,7 @@
 
                     <v-img
                       height="250"
-                      :src="imgSrc[i%27+1]"
+                      :src="imgSrc[(i%26)+1]"
                     ></v-img>
 
                     <v-card-title> {{ house.apartmentName }}</v-card-title>
