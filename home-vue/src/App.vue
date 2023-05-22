@@ -44,12 +44,11 @@ export default {
   text-align: center;
   color: #2c3e50;
 
-  
   background-image: url("@/assets/header-bg.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: top;
-  background-size : 100% 40%;
+  background-size: 100% 40%;
 }
 
 nav {
@@ -66,12 +65,11 @@ nav a.router-link {
   color: #2c3e50;
 }
 
-.content{
+.content {
   margin: 90px 100px;
   padding: 30px;
   background-color: white;
   border-radius: 1em;
   box-shadow: 0px 0px 10px 0px rgb(240, 240, 240);
 }
-
 </style>
