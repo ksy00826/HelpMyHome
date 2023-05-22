@@ -94,8 +94,8 @@ export default {
             this.removeMarker();
             //바운드 객체
             this.bounds = new kakao.maps.LatLngBounds();
-
-            if (newHouse.length != 0){
+            console.log("newHouse: " +newHouse + typeof(newHouse)) //string
+            if (newHouse.length != 0){//.length != 0 && newHouse != undefined && newHouse != null && newHouse
                 // console.log("sear",this.searchInfo)
                 // const area = this.searchInfo.sidoName + " " + this.searchInfo.gugunName + " " + this.searchInfo.dongName;
                 // console.log(area)

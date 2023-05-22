@@ -90,11 +90,20 @@
     // template: '#app-template',
     data: () => ({
       imgSrc:[],
+      loading: false,
+      selection: 1,
     }),
     created(){
       for (var j = 1; j <= 27; j++){
         this.imgSrc.push(require(`@/assets/aptImg/${j}.jpg`)) //require!!
       }
+    },
+    methods: {
+      reserve () {
+        this.loading = true
+
+        setTimeout(() => (this.loading = false), 2000)
+      },
     },
     computed: {
       ...mapGetters(["houses"]),
