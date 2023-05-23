@@ -10,7 +10,7 @@
                         <h3>{{ house.apartmentName }}</h3>
                         <b-card-text>
                             <p>{{ house.dongName }} {{ house.buildYear }}</p>
-                            <p>매매가 : {{ house.dealAmount }}</p>
+                            <p>매매가 : {{ house.dealAmount }}(만)</p>
                         </b-card-text>
 
                         <b-button href="#" variant="primary">Go somewhere</b-button>
