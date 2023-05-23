@@ -11,7 +11,7 @@
                         <b-card-text>
                             <p>{{ house.dongName }} {{ house.buildYear }}</p>
                             <p>매매정보</p>
-                            <b-table :items="dealInfo" :key="dealInfo.dealYear"></b-table>
+                            <b-table v-if="dealInfo" :items="dealInfo" :key="dealInfo.dealYear"></b-table>
                         </b-card-text>
                     </b-card>
                 </div>
@@ -25,7 +25,7 @@
 
 <script>
 // const vueThis = this;
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
     name: 'KakaoMap',
     components: {},
@@ -41,8 +41,10 @@ export default {
         };
     },
     created() {
+        
     },
-    mounted(){
+    async mounted(){
+
         if(window.kakao && window.kakao.maps){
             this.loadMap();
         }
@@ -50,6 +52,7 @@ export default {
             this.loadScript();
         }
         
+
         //로드뷰를 해당 아이디 div에 생성합니다
         if (!this.roadview){
             console.log("created roadView")
@@ -57,9 +60,16 @@ export default {
             this.roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
             this.roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
         }
+
+        
+            
+            // //왼쪽 로드뷰 박스 초기화 : house, dealInfo
+            // this.CLEAR_HOUSE();
+            // this.CLEAR_DEAL_INFO();
     },
     methods: {
         ...mapActions(["setHouse", "getDealInfo"]),
+        ...mapMutations(["CLEAR_HOUSE", "CLEAR_DEAL_INFO"]),
         loadScript() {
             const script = document.createElement("script");
             script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=74f1e792cc4d7d72169a67ae909e2b50&libraries=services,clusterer,drawing"
@@ -75,6 +85,7 @@ export default {
             };
 
             this.map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
         },
 
         // 마커를 생성하고 지도위에 표시하는 함수입니다

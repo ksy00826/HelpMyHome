@@ -88,6 +88,17 @@ export default {
         CLEAR_APT_LIST(state) {
             state.houses = [];
         },
+        CLEAR_HOUSE(state){
+            state.house = {
+                apartmentName: "아파트 이름",
+                buildYear: "건물 연식",
+                dealAmount: "매매가",
+                dongName: "동",
+            };
+        },
+        CLEAR_DEAL_INFO(state){
+            state.dealInfo = [];
+        },
 
         //setter
         SET_DONGCODE_LIST(state, payload){
