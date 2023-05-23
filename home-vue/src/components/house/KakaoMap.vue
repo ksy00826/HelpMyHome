@@ -35,10 +35,12 @@ export default {
             markers: [],
             bounds: null, //지도의 영역 범위 재설정을 위한 변수
             selectedMarker: null, //마커 클릭
+            //로드뷰
+            roadview: null,
+            roadviewClient: null,
         };
     },
     created() {
-        this.vueThis = this;
     },
     mounted(){
         if(window.kakao && window.kakao.maps){
@@ -46,6 +48,14 @@ export default {
         }
         else{
             this.loadScript();
+        }
+        
+        //로드뷰를 해당 아이디 div에 생성합니다
+        if (!this.roadview){
+            console.log("created roadView")
+            var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+            this.roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+            this.roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
         }
     },
     methods: {
@@ -160,19 +170,30 @@ export default {
 
             //선택된 apt의 매매정보 가져오기 : aptCode
             this.getDealInfo(newHouse.aptCode)
-        },
-        selectedMarker: function(){
-            //로드뷰를 해당 아이디 div에 생성합니다
-            var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
-            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
 
-            var position = this.selectedMarker.getPosition();
+            //로드뷰 띄우기
+            var position = new window.kakao.maps.LatLng(newHouse.lat, newHouse.lng)
+            console.log("로드뷰 포지션!!: "+ position) //33.450701, 126.570667
+
+            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+            console.log("this")
+            console.log(this) //yes
+            // console.log(vueThis); //no
+            const vueThis = this;
+            this.roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                vueThis.roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+            });
+        },
+        selectedMarker: function(newSel){
+            //로드뷰 띄우기
+            
+            var position = newSel.getPosition();
             console.log("로드뷰 포지션: "+ position) //33.450701, 126.570667
 
             // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-            roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-                roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+            const vueThis = this;
+            this.roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                vueThis.roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
             });
         }
     }
