@@ -56,7 +56,7 @@
 
 <script>
 import http from "@/api/http";
-
+import { mapGetters } from "vuex";
 export default {
   name: "BoardInputItem",
   data() {
@@ -83,6 +83,15 @@ export default {
         this.article = data;
       });
       this.isUserid = true;
+    }
+    console.log(this.loginUser)
+    if (this.loginUser != null){
+      //로그인 유저 존재
+      this.isUserid = true;
+      this.article.userid = this.loginUser.id;
+    }
+    else{
+      this.isUserid = false;
     }
   },
   methods: {
@@ -155,6 +164,9 @@ export default {
       this.$router.push({ name: "boardlist" });
     },
   },
+  computed:{
+    ...mapGetters(["loginUser"])
+  }
 };
 </script>
 

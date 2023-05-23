@@ -21,6 +21,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean create(Comment commentDto) {
+		System.out.println(commentDto);
 		return commentDao.create(commentDto) == 1;
 	}
 

@@ -36,7 +36,7 @@
         </b-card>
       </b-col>
     </b-row>
-    <comment-write></comment-write>
+    <comment-write :articleno="article.articleno"></comment-write>
     <b-list-group>
       <comment-row
         v-for="comment in comments"
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import http from "@/api/http";
 
 export default {
@@ -64,7 +64,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["comments", "article"]),
+    ...mapGetters(["comments"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -74,16 +74,19 @@ export default {
   created() {
     http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
       this.article = data;
+      console.log(this.article)
+      //해당 글을 불러오면, 해당 글의 댓글들을 불러옴
+      this.getComments({
+        articleno : this.article.articleno,
+      });
     });
     // this.getBoard({
     //   articleno,
     // });
 
-    // this.getComments({
-    //   articleno,
-    // });
   },
   methods: {
+    ...mapActions(["getComments"]),
     moveModifyArticle() {
       this.$router.replace({
         name: "boardmodify",

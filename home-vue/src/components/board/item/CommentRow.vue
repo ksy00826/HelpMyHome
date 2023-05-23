@@ -11,8 +11,7 @@
       <b-button-group>
         <b-button variant="secondary" @click="showModalModify">수정</b-button>
         <b-button variant="outline-secondary" @click="showModalDelete"
-          >삭제</b-button
-        >
+          >삭제</b-button>
       </b-button-group>
     </div>
 

@@ -17,6 +17,15 @@ public class Comment {
 	@ApiModelProperty(value = "글번호", example="1")
 	private int articleno;
 
+	public Comment(int commentNo, String userName, String comment, String commentTime, int articleno) {
+		super();
+		this.commentNo = commentNo;
+		this.userName = userName;
+		this.comment = comment;
+		this.commentTime = commentTime;
+		this.articleno = articleno;
+	}
+
 	public int getCommentNo() {
 		return commentNo;
 	}

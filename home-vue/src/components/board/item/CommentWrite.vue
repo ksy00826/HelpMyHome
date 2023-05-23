@@ -3,7 +3,8 @@
     <b-input-group style="width: 240px" prepend="작성자">
       <b-form-input
         placeholder="작성자 입력 ..."
-        v-model="userName"></b-form-input>
+        v-model="userName"
+        disabled></b-form-input>
     </b-input-group>
     <b-input-group>
       <b-form-textarea
@@ -21,19 +22,28 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
+  props:{
+    articleno: Number,
+  },
   data() {
     return {
       userName: "",
       comment: "",
     };
   },
+  mounted() {
+    if (this.loginUser){
+      console.log(this.loginUser)
+      this.userName = this.loginUser.id;
+    }
+  },
   methods: {
     ...mapActions(["createComment", "getComments"]),
     write() {
-      console.log(this.article.articleno);
+      console.log(this.articleno);
       const payload = {
         comment: {
-          articleno: this.article.articleno,
+          articleno: this.articleno,
           userName: this.userName,
           comment: this.comment,
         },
@@ -49,7 +59,7 @@ export default {
 
             // 댓글 목록 갱신
             this.getComments({
-              articleno: this.article.articleno,
+              articleno: this.articleno,
             });
 
             // Bootstrap Vue를 이용하여 메시지 출력
@@ -60,7 +70,7 @@ export default {
               autoHideDelay: 3000, // 3초 뒤 사라짐
               solid: true, // 불투명처리
             });
-          } else if (status == 500) {
+          } else  {
             // Bootstrap Vue를 이용하여 메시지 출력
             this.$bvToast.toast("서버 오류 입니다.", {
               title: "댓글 알림",
@@ -81,7 +91,7 @@ export default {
     // book() {
     //   return this.$store.getters.book;
     // },
-    ...mapGetters(["article"]),
+    ...mapGetters(["article", "loginUser"]),
   },
 };
 </script>

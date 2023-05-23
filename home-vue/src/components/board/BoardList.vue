@@ -68,6 +68,7 @@
 
 <script>
 import http from "@/api/http";
+import { mapGetters } from "vuex";
 
 export default {
   name: "BoardList",
@@ -90,6 +91,7 @@ export default {
   },
   methods: {
     moveWrite() {
+      console.log("list: ", this.loginUser)
       this.$router.push({ name: "boardwrite" });
     },
     viewArticle(article) {
@@ -99,6 +101,9 @@ export default {
       });
     },
   },
+  computed:{
+    ...mapGetters(["loginUser"])
+  }
 };
 </script>
 

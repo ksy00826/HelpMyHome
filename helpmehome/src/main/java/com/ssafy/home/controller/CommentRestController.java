@@ -49,7 +49,7 @@ public class CommentRestController {
 	@PostMapping("/comment")
 	public ResponseEntity<?> createComment(@RequestBody Comment commentDto) {
 		logger.debug("createComment - 호출");
-
+		System.out.println(commentDto);
 		try {
 			boolean isWrite = commentService.create(commentDto);
 

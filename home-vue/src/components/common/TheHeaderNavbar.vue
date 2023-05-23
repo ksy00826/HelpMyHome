@@ -174,6 +174,7 @@ import LoginModal from "@/components/user/LoginModal";
 import UserInModal from "@/components/user/UserInModal.vue";
 import UserPasswordFindModal from "../user/UserPasswordFindModal.vue";
 import UserInfoModal from "../user/UserInfoModal.vue";
+import { mapActions } from 'vuex';
 // import * as bootstrap from 'bootstrap';
 // import $ from 'jquery';
 
@@ -202,6 +203,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setLoginUser"]),
     showNoUserStorage() {
       document
         .querySelector("#noUserStorage")
@@ -220,6 +222,7 @@ export default {
         .setAttribute("style", "display: ;");
     },
     logout() {
+      this.setLoginUser(null);
       sessionStorage.clear();
       location.reload();
     },

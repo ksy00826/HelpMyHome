@@ -77,6 +77,8 @@
 
 <script>
 import http from "@/api/http";
+import { mapActions } from "vuex";
+
 export default {
   name: "LoginModal",
   components: {},
@@ -89,7 +91,9 @@ export default {
   },
   created() {},
   methods: {
+    ...mapActions(["setLoginUser"]),
     login() {
+      const vueThis = this;
       http.get(`/user/${this.loginId}`).then(({ data }) => {
         console.log(data);
 
@@ -97,7 +101,11 @@ export default {
           if (data.pw == this.loginPw) {
             //로그인 성공 : 세션 처리
             sessionStorage.setItem("loginUser", JSON.stringify(data));
+            console.log(data)
+            vueThis.setLoginUser(data);
             location.reload();
+            // $('#login').modal('hide'); 
+
           } else {
             //로그인 실패 : 비밀번호 틀림
             alert("로그인 실패! 비밀번호가 틀렸습니다");
