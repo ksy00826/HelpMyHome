@@ -17,7 +17,7 @@
     </b-card>
     <b-card>
       <b-row>
-        <house-card-list @scrollMap="goMapd"></house-card-list>
+        <house-card-list v-on:scrollMap="goMapd"></house-card-list>
       </b-row>
     </b-card>
     <!-- <house-list></house-list> -->
@@ -49,11 +49,11 @@ export default {
     HouseKeywordSearch,
     HouseCardList,
   },
-  method: {
+  methods: {
     goMapd: function(){
       console.log("go : dd")
       const element = document.getElementById("kakaoMap");
-      element.scrollIntoView();
+      element.scrollIntoView({behavior: 'smooth'});
     }
   },
 };

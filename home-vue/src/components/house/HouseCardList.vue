@@ -31,7 +31,7 @@
                     <v-btn
                       color="deep-purple lighten-2"
                       text
-                      @click="goMap(house)">
+                      v-on:click="goMap(house)">
                       Go Map
                     </v-btn>
                     <v-card-title> {{ house.apartmentName }}</v-card-title>
@@ -98,7 +98,7 @@
     methods: {
       ...mapActions(["setHouse"]),
       goMap(house) {
-        this.$emit("scrollMap");
+        this.$emit('scrollMap');
         this.loading = true
 
         this.setHouse(house)
