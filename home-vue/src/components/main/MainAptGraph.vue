@@ -10,14 +10,16 @@
                 <b-button  v-for="(sido, index) in sidos" :key="index"
                 @click="changeGraph(sido)">{{ sido }}</b-button>
             </b-button-group> -->
-            <div >
-                <Bar
-                    v-if="loaded"
-                    id="my-chart-id"
-                    :options="chartOptions"
-                    :data="chartData"
-                />
-            </div>
+            <b-overlay :show="!loaded" style="padding:10px">
+                <div>
+                    <Bar
+                        v-if="loaded"
+                        id="my-chart-id"
+                        :options="chartOptions"
+                        :data="chartData"
+                    />
+                </div>
+            </b-overlay>
         </b-card>
         <!-- <div>
             <img :src="imageSrc">
