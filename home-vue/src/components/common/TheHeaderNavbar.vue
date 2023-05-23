@@ -39,11 +39,10 @@
       variant=""
       id="navbar"
       style="
-        height: 50px;
+        /* height: 50px; */
         border: ;
         background-color: rgba(255, 255, 255, 0.8);
       ">
-      <b-container>
         <b-navbar-brand>
           <router-link :to="{ name: 'main' }" class="nav-link">
             <!-- <img src="https://www.flaticon.com/free-icons/real-estate.png" class="d-inline-block align-top" alt="home"> -->
@@ -143,7 +142,6 @@
                 <li class="nav-item"><a class="nav-link"
                   href="${root}/home?cmd=goAdminPage">부동산정보관리</a></li>  -->
         </b-collapse>
-      </b-container>
     </b-navbar>
 
     <!-- Masthead-->

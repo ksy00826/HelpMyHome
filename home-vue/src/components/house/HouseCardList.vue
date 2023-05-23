@@ -28,6 +28,15 @@
                       :src="imgSrc[(i%26)+1]"
                     ></v-img>
 
+                    <v-card-actions>
+                      <v-btn
+                        color="deep-purple lighten-2"
+                        text
+                        @click="goMap(house)"
+                      >
+                        Go Map
+                      </v-btn>
+                    </v-card-actions>
                     <v-card-title> {{ house.apartmentName }}</v-card-title>
 
                     <v-card-text>
@@ -68,15 +77,6 @@
                       </v-chip-group>
                     </v-card-text>
 
-                    <v-card-actions>
-                      <v-btn
-                        color="deep-purple lighten-2"
-                        text
-                        @click="goMap(house)"
-                      >
-                        Go Map
-                      </v-btn>
-                    </v-card-actions>
                   </v-card>
                 </v-slide-item>
             </v-slide-group>
