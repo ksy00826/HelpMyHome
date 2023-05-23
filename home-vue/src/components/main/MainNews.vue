@@ -1,16 +1,17 @@
 <template>
   <b-container>
-    <b-card title="부동산 핫이슈">
+      <h3 class="text-right">HOT ISSUE</h3>
       <div>
         <!-- v-model="slide" 일단 뻄 -->
         <b-carousel
           id="carousel-1"
-          
           :interval="4000"
           controls
           indicators
           background="#ababab"
           style="text-shadow: 1px 1px 2px #333"
+          img-width="1024"
+          img-height="480"
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd">
           <div v-if="loaded">
@@ -20,15 +21,28 @@
               :key="i"
               :img-src="image[i]"
               @click="moveimg(info[i])">
-              <!-- 이미지 클릭 (미동작) -->
-              <a
+              <!-- <a
                 class="mt-4"
-                style="position: absolute; top: -310px; font-size: 24px"
+                style="font-size: 30px; 
+                color: white; opacity:2; text-align: center;"
                 :href="info[i]"
                 >{{ title[i].substr(0, 30) }}...</a>
 
-              {{ content[i].substr(0, 45) }}...
-              <br />
+                <p style="color:white; opacity: 1;">
+                  {{ content[i].substr(0, 45) }}...
+                </p>
+              <br /> -->
+              <b-card >
+                <b-card-text >
+                  <a
+                    class="mt-4"
+                    style="font-size: 30px; 
+                    color: black; opacity:2; text-align: center;"
+                    :href="info[i]"
+                    >{{ title[i].substr(0, 30) }}...</a>
+                </b-card-text>
+                <b-card-text style="color: black">{{ content[i].substr(0, 45) }}...</b-card-text>
+              </b-card>
             </b-carousel-slide>
           </div>
         </b-carousel>
@@ -38,7 +52,6 @@
         Sliding: {{ sliding }}
       </p> -->
       </div>
-    </b-card>
   </b-container>
 </template>
 <script>
@@ -145,5 +158,12 @@ export default {
   object-fit: fill;
   object-position: center center;
   background-size: contain;
+}
+.container{
+  background-color: rgb(250, 243, 244);
+  margin: 20px;
+}
+#__BVID__38 > img{
+  opacity: 1;
 }
 </style>

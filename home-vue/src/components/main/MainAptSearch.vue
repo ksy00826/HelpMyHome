@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-card title="매물 찾기">
+      <h3 class="text-left">구해줘 HOME</h3>
       <div>
         <!-- v-model="slide"  일단뺌-->
         <b-carousel
@@ -59,7 +59,6 @@
         Sliding: {{ sliding }}
       </p> -->
       </div>
-    </b-card>
   </b-container>
 </template>
 <script>
@@ -166,5 +165,9 @@ export default {
   object-fit: fill;
   object-position: center center;
   background-size: contain;
+}
+.container{
+  background-color: rgb(250, 250, 255);
+  margin: 20px;
 }
 </style>

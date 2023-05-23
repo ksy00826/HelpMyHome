@@ -1,21 +1,25 @@
 <template>
   <b-container>
     <b-row>
-      <b-col>
-        <main-news></main-news>
-      </b-col>
-      <b-col>
-        <main-apt-search></main-apt-search>
-      </b-col>
+      <b-container id="outline">
+        <h3 class="text-center">Daily Info.</h3>
+        <b-row>
+          <b-col>
+            <main-weather></main-weather>
+          </b-col>
+          <b-col>
+            <main-apt-graph></main-apt-graph>
+          </b-col>
+        </b-row>
+      </b-container>
     </b-row>
     <b-row>
-      <b-col>
-        <main-weather></main-weather>
-      </b-col>
-      <b-col>
-        <main-apt-graph></main-apt-graph>
-      </b-col>
+        <main-apt-search></main-apt-search>
     </b-row>
+    <b-row>
+        <main-news></main-news>
+    </b-row>
+
   </b-container>
 </template>
 
@@ -41,4 +45,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#outline{
+  background-color: rgb(250, 253, 255);
+  margin: 20px;
+}
+</style>

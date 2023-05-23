@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      userName: "",
+      userName: "Guest",
       comment: "",
     };
   },
