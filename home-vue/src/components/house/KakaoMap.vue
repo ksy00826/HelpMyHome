@@ -2,7 +2,7 @@
     <div class="text-center">
         <!-- <div id="roadview" style="width:100%;height:300px;"></div> -->
         <v-row>
-            <v-col cols="3" style="height:100%;">
+            <v-col cols="3" style="height:500px;">
                 <div>
                     <b-card class="mb-2">
                         <div id="roadview" style="width:100%; height:200px"></div>

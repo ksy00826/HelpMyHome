@@ -26,7 +26,23 @@ export default {
         ...mapActions(["getKeywordHouseList"]),
         searchKeyword(){
             console.log(this.keyword)
-            this.getKeywordHouseList(this.keyword);
+            if (this.keyword){
+                this.toast('b-toaster-bottom-center', true, "keyword", "서칭이 수행되었습니다");
+                this.getKeywordHouseList(this.keyword);
+            }
+            else{
+                // alert("키워드를 입력해주세요")
+                this.toast('b-toaster-bottom-center', true, "keyword", "검색어를 입력해주세요");
+            }
+        },
+
+        toast(toaster, append = false, title, msg) {
+            this.$bvToast.toast(msg, {
+                title: title,
+                toaster: toaster,
+                solid: true,
+                appendToast: append
+            })
         }
     },
 };

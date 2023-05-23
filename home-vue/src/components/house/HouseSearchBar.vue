@@ -28,7 +28,7 @@ export default {
       sidoName: null,
       gugunName: null,
       dongName: null,
-      year: '2023',
+      year: '2022',
       month: '1',
     };
   },
