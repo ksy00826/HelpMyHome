@@ -13,11 +13,11 @@
           <house-keyword-search></house-keyword-search>
         </b-col>
       </b-row>
-      <kakao-map></kakao-map>
+      <kakao-map id="kakaoMap"></kakao-map>
     </b-card>
     <b-card>
       <b-row>
-        <house-card-list></house-card-list>
+        <house-card-list @scrollMap="goMapd"></house-card-list>
       </b-row>
     </b-card>
     <!-- <house-list></house-list> -->
@@ -49,7 +49,13 @@ export default {
     HouseKeywordSearch,
     HouseCardList,
   },
-  method: {},
+  method: {
+    goMapd: function(){
+      console.log("go : dd")
+      const element = document.getElementById("kakaoMap");
+      element.scrollIntoView();
+    }
+  },
 };
 </script>
 

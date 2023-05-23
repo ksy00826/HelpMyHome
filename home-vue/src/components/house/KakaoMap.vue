@@ -11,7 +11,7 @@
                         <b-card-text>
                             <p>{{ house.dongName }} {{ house.buildYear }}</p>
                             <p>매매정보</p>
-                            <b-table :items="dealInfo" :key="dealYear"></b-table>
+                            <b-table :items="dealInfo" :key="dealInfo.dealYear"></b-table>
                         </b-card-text>
                     </b-card>
                 </div>

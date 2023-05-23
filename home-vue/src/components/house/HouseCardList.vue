@@ -28,15 +28,12 @@
                       :src="imgSrc[(i%26)+1]"
                     ></v-img>
 
-                    <v-card-actions>
-                      <v-btn
-                        color="deep-purple lighten-2"
-                        text
-                        @click="goMap(house)"
-                      >
-                        Go Map
-                      </v-btn>
-                    </v-card-actions>
+                    <v-btn
+                      color="deep-purple lighten-2"
+                      text
+                      @click="goMap(house)">
+                      Go Map
+                    </v-btn>
                     <v-card-title> {{ house.apartmentName }}</v-card-title>
 
                     <v-card-text>
@@ -65,7 +62,7 @@
 
                     <v-divider class="mx-4"></v-divider>
 
-                    <v-card-title>Recently Deal Amount</v-card-title>
+                    <!-- <v-card-title>Recently Deal Amount</v-card-title>
 
                     <v-card-text>
                       <v-chip-group
@@ -75,7 +72,7 @@
                       >
                         <v-chip>{{ house.dealAmount }}(만)</v-chip>
                       </v-chip-group>
-                    </v-card-text>
+                    </v-card-text> -->
 
                   </v-card>
                 </v-slide-item>
@@ -101,11 +98,14 @@
     methods: {
       ...mapActions(["setHouse"]),
       goMap(house) {
+        this.$emit("scrollMap");
         this.loading = true
 
         this.setHouse(house)
+        //지도로 올라가기
+        console.log("go : card")
 
-        setTimeout(() => (this.loading = false), 2000)
+        setTimeout(() => (this.loading = false), 1000)
       },
     },
     computed: {

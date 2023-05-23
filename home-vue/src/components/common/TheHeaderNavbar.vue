@@ -66,7 +66,7 @@
           <div id="noUserStorage" style="display: " class="ml-auto">
             <b-navbar-nav>
               <!--부동산 정보 및 게시판 라우터 링크-->
-              <b-navbar-brand><b-icon icon="house" aria-hidden="true"></b-icon></b-navbar-brand>
+              <b-navbar-brand style="margin: auto;"><b-icon icon="house" aria-hidden="true"></b-icon></b-navbar-brand>
               <b-nav-text
                 ><router-link :to="{ name: 'house' }" class="nav-link"
                   >부동산</router-link
@@ -78,7 +78,7 @@
                 ></b-nav-text
               >
               <!--회원-->
-              <b-navbar-brand><b-icon icon="person" aria-hidden="true"></b-icon></b-navbar-brand>
+              <b-navbar-brand style="margin: auto;"><b-icon icon="person" aria-hidden="true"></b-icon></b-navbar-brand>
               <b-nav-text
                 ><a
                   class="nav-link"
@@ -113,7 +113,7 @@
           <div id="UserStorage" style="display: none" class="ml-auto">
             <b-navbar-nav>
               <!--부동산 정보 및 게시판 라우터 링크-->
-              <b-navbar-brand><b-icon icon="house" aria-hidden="true"></b-icon></b-navbar-brand>
+              <b-navbar-brand style="margin: auto;"><b-icon icon="house" aria-hidden="true" ></b-icon></b-navbar-brand>
               <b-nav-text
                 ><router-link :to="{ name: 'house' }" class="nav-link"
                   >부동산</router-link
@@ -125,7 +125,7 @@
                 ></b-nav-text
               >
               <!--회원-->
-              <b-navbar-brand><b-icon icon="person" aria-hidden="true"></b-icon></b-navbar-brand>
+              <b-navbar-brand style="margin: auto;"><b-icon icon="person" aria-hidden="true"></b-icon></b-navbar-brand>
               <b-nav-text
                 ><a
                   class="nav-link"
