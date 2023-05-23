@@ -30,6 +30,8 @@ public interface AptService {
 
 	List<HomeResultDto> getKeywordHomeList(String keyword) throws SQLException;
 
+	List<HomeResultDto> getDealInfo(String aptCode) throws SQLException;
+
 //	String getDongCode(String curSido, String curGugun, String curDong) throws SQLException;
 
 }

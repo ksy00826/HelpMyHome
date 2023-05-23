@@ -1,7 +1,6 @@
 package com.ssafy.home.model;
 
 public class HomeResultDto {
-
 	private String aptCode;
 	private String buildYear;
 	private String apartmentName;

@@ -34,10 +34,7 @@ public class AptServiceImpl implements AptService{
 	@Override
 	public List<HomeResultDto> getHomeList(HomeInfoDto homeInfoDto) throws SQLException {
 		List<HomeResultDto> list = mapper.getHomeList(homeInfoDto);
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i).getDealAmount());
-//		}
-		list = sort(list);
+//		list = sort(list);
 		return list;
 	}
 
@@ -179,6 +176,11 @@ public class AptServiceImpl implements AptService{
 	@Override
 	public List<HomeResultDto> getKeywordHomeList(String keyword) throws SQLException {
 		return mapper.getKeywordHomeList(keyword);
+	}
+
+	@Override
+	public List<HomeResultDto> getDealInfo(String aptCode) throws SQLException {
+		return mapper.getDealInfo(aptCode);
 	}
 
 //	@Override

@@ -11,6 +11,7 @@
 	</select>
 	
 	<select id="getHomeList" parameterType="homeInfoDto" resultType="homeResultDto">
+	<!-- 
 		select hi.aptCode, hi.buildYear, hi.apartmentName, hd.floor, hd.area, hi.dongCode, dc.dongName, hd.dealamount, hi.lng, hi.lat
 		from dongcode dc
 		join houseinfo hi on dc.dongCode = hi.dongCode
@@ -19,7 +20,14 @@
 		and dc.gugunName = #{gugunName}
 		and dc.dongName = #{dongName}
 		and hd.dealYear = #{year}
-		and hd.dealMonth = #{month}
+		and hd.dealMonth = #{month} -->
+		<!-- 변경 : 시도, 구군, 동 이름만 검색하면, 해당 지역의 아파트 정보만 반환(매매정보 아님) : 층, 면적, 매매가 삭제됨 -->
+		select hi.aptCode, hi.buildYear, hi.apartmentName, hi.dongCode, dc.dongName, hi.lng, hi.lat
+		from dongcode dc
+		join houseinfo hi on dc.dongCode = hi.dongCode
+		where dc.sidoName = #{sidoName}
+		and dc.gugunName = #{gugunName}
+		and dc.dongName = #{dongName}
 	</select>
 	
 	<delete id="removeApt" parameterType="homeResultDto">
@@ -58,5 +66,13 @@
 		join houseinfo hi on dc.dongCode = hi.dongCode
 		join housedeal hd on hi.aptCode = hd.aptCode
 		where hi.apartmentName like CONCAT("%", #{keyword}, "%");
+	</select>
+	<select id="getDealInfo" parameterType="String" resultType="dealInfoDto">
+		select dealYear, max(CAST(dealAmount AS double)) maxAmount, min(CAST(dealAmount AS double)) minAmount
+		from housedeal
+		where aptCode = #{aptCode}
+		group by dealYear
+		order by dealYear desc 
+		limit 3
 	</select>
 </mapper>

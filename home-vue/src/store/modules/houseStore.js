@@ -9,9 +9,9 @@ export default {
         "gugunName": null,
         "dongName": null
         */
-        sidos: [{ value: null, text: "시도이름" }],
-        guguns: [{ value: null, text: "구군이름" }],
-        dongs: [{ value: null, text: "동이름"}],
+        sidos: [{ value: null, text: "시도" }],
+        guguns: [{ value: null, text: "구군" }],
+        dongs: [{ value: null, text: "동"}],
         houses: [], //리스트 뿌리기
         /*
         apartmentName
@@ -40,6 +40,7 @@ export default {
             gugunName: null,
             dongName: null,
         },
+        dealInfo: [],
     },
     getters: {
         dongcodes(state){
@@ -68,18 +69,21 @@ export default {
         },
         house(state){
             return state.house;
+        },
+        dealInfo(state){
+            return state.dealInfo;
         }
     },
     mutations: {
         //clear
         CLEAR_SIDO_LIST(state) {
-            state.sidos = [{ value: null, text: "시도이름" }];
+            state.sidos = [{ value: null, text: "시도" }];
         },
         CLEAR_GUGUN_LIST(state){
-            state.guguns = [{ value: null, text: "구군이름" }];
+            state.guguns = [{ value: null, text: "구군" }];
         },
         CLEAR_DONG_LIST(state){
-            state.dongs = [{ value: null, text: "동이름" }];
+            state.dongs = [{ value: null, text: "동" }];
         },
         CLEAR_APT_LIST(state) {
             state.houses = [];
@@ -129,6 +133,9 @@ export default {
         },
         SET_HOUSE(state, payload){
             state.house = payload.house;
+        },
+        SET_DEAL_INFO(state, payload){
+            state.dealInfo = payload.dealInfo;
         }
     },
     actions: {
@@ -162,7 +169,7 @@ export default {
         },
         getHouseList({commit}, payload){
             http
-                .get(`/apt/${payload.sidoName}/${payload.gugunName}/${payload.dongName}/${payload.year}/${payload.month}`)
+                .get(`/apt/${payload.sidoName}/${payload.gugunName}/${payload.dongName}`)
                 .then(({data}) => {
                     commit({
                         type: "SET_HOUSE_LIST",
@@ -191,7 +198,18 @@ export default {
                 type: "SET_HOUSE",
                 house: house,
             })
+        },
+        getDealInfo({commit}, aptCode){
+            console.log("aptCode", aptCode)
+            http
+                .get(`/apt/dealinfo/${aptCode}`)
+                .then(({data}) => {
+                    console.log(data)
+                    commit({
+                        type: "SET_DEAL_INFO",
+                        dealInfo: data,
+                    })
+                })
         }
-        
     },
 }

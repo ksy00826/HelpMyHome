@@ -7,14 +7,14 @@
       <b-form-select v-model="gugunName" :options="guguns" @change="dongList"></b-form-select>
     </b-col>
     <b-col class="sm-3">
-      <b-form-select v-model="dongName" :options="dongs"></b-form-select>
+      <b-form-select v-model="dongName" :options="dongs" @change="searchApt"></b-form-select>
     </b-col>
-    <b-col class="sm-3">
+    <!-- <b-col class="sm-3">
       <b-form-select v-model="year" :options="years"></b-form-select>
     </b-col>
     <b-col class="sm-3">
       <b-form-select v-model="month" :options="months" @change="searchApt"></b-form-select>
-    </b-col>
+    </b-col> -->
   </b-row>
 </template>
 
@@ -50,6 +50,7 @@ export default {
     gugunList() {
       // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
+      this.CLEAR_DONG_LIST();
       this.gugunName = null;
       if (this.sidoName) {
         this.getGugun({
@@ -71,8 +72,6 @@ export default {
         sidoName: this.sidoName,
         gugunName: this.gugunName,
         dongName: this.dongName,
-        year: this.year,
-        month: this.month,
       });
     },
   },

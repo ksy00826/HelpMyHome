@@ -68,11 +68,10 @@ public class AptRestController {
 	}
 	
 	//집 정보 검색 : 사용자가 선택한 값으로 집 정보 검색 후 리스트 반환
-	@GetMapping(value = "/apt/{sido}/{gugun}/{dong}/{year}/{month}")
-	public ResponseEntity<?> searchHome(@PathVariable String sido, @PathVariable String gugun, @PathVariable String dong, 
-										@PathVariable int year, @PathVariable int month){
+	@GetMapping(value = "/apt/{sido}/{gugun}/{dong}")
+	public ResponseEntity<?> searchHome(@PathVariable String sido, @PathVariable String gugun, @PathVariable String dong){
 		try {
-			HomeInfoDto searchHomeInfo = new HomeInfoDto(sido, gugun, dong, year, month); //파라미터값 넣기
+			HomeInfoDto searchHomeInfo = new HomeInfoDto(sido, gugun, dong); //파라미터값 넣기
 			List<HomeResultDto> homeList = aptService.getHomeList(searchHomeInfo);
 			
 			if(homeList != null && !homeList.isEmpty()) {
@@ -85,13 +84,29 @@ public class AptRestController {
 		}
 	}
 	
+	//아파트 매매정보 검색 : 입력받은 아파트 코드에 해당하는 아파트의 매매정보 반환(연도별, 면적별 최고 매매가, 최저 매매가. 최근 5년)
+	@GetMapping(value = "/apt/dealinfo/{aptCode}")
+	public ResponseEntity<?> searchDealInfo(@PathVariable String aptCode){
+		try {
+			List<HomeResultDto> homeList = aptService.getDealInfo(aptCode);
+			
+			if(homeList != null && !homeList.isEmpty()) {
+				return new ResponseEntity<List<HomeResultDto>>(homeList, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
 	//집 키워드 검색 : 기존 리스트에서 키워드 검색 : body에 일단 담아서 보냄.. => get은 body 못씀!!
-	@GetMapping("/apt/{sido}/{gugun}/{dong}/{year}/{month}/{keyword}")
+	@GetMapping("/apt/{sido}/{gugun}/{dong}/{year}")
 	public ResponseEntity<?> searchKeywordHome(@PathVariable String sido, @PathVariable String gugun, @PathVariable String dong, 
 												@PathVariable int year, @PathVariable int month, @PathVariable String keyword){
 		try {
 			//우선 기존 리스트 검색
-			HomeInfoDto searchHomeInfo = new HomeInfoDto(sido, gugun, dong, year, month); //파라미터값 넣기
+			HomeInfoDto searchHomeInfo = new HomeInfoDto(sido, gugun, dong); //파라미터값 넣기
 			List<HomeResultDto> homeList = aptService.getHomeList(searchHomeInfo);
 			//검색한 리스트 바탕으로 search
 			List<HomeResultDto> newRes = aptService.getSearchList(homeList, keyword);

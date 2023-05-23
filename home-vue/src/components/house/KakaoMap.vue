@@ -2,7 +2,7 @@
     <div class="text-center">
         <!-- <div id="roadview" style="width:100%;height:300px;"></div> -->
         <v-row>
-            <v-col cols="3" style="height:500px;">
+            <v-col cols="3" style="height:600px;">
                 <div>
                     <b-card class="mb-2">
                         <div id="roadview" style="width:100%; height:200px"></div>
@@ -10,10 +10,9 @@
                         <h3>{{ house.apartmentName }}</h3>
                         <b-card-text>
                             <p>{{ house.dongName }} {{ house.buildYear }}</p>
-                            <p>매매가 : {{ house.dealAmount }}(만)</p>
+                            <p>매매정보</p>
+                            <b-table :items="dealInfo" :key="dealYear"></b-table>
                         </b-card-text>
-
-                        <b-button href="#" variant="primary">Go somewhere</b-button>
                     </b-card>
                 </div>
             </v-col>
@@ -50,7 +49,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["setHouse"]),
+        ...mapActions(["setHouse", "getDealInfo"]),
         loadScript() {
             const script = document.createElement("script");
             script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=74f1e792cc4d7d72169a67ae909e2b50&libraries=services,clusterer,drawing"
@@ -127,7 +126,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["houses", "searchInfo", "house"])
+        ...mapGetters(["houses", "searchInfo", "house", "dealInfo"])
     },
     watch:{
         houses : function(newHouse) {
@@ -155,8 +154,12 @@ export default {
         },
         house: function(newHouse){
             // this.map.panTo()
+            //지도 이동
             console.log(newHouse);
             this.map.panTo(new window.kakao.maps.LatLng(newHouse.lat, newHouse.lng));
+
+            //선택된 apt의 매매정보 가져오기 : aptCode
+            this.getDealInfo(newHouse.aptCode)
         },
         selectedMarker: function(){
             //로드뷰를 해당 아이디 div에 생성합니다
@@ -179,7 +182,7 @@ export default {
 <style>
 #map{
     width: 100%;
-    height: 500px;
+    height: 600px;
 }
 .label{
     padding: 5px 10px;
