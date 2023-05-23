@@ -1,12 +1,32 @@
 <template>
     <div class="text-center">
-        <div id="map"></div>
+        <!-- <div id="roadview" style="width:100%;height:300px;"></div> -->
+        <v-row>
+            <v-col cols="3" style="height:100%;">
+                <div>
+                    <b-card class="mb-2">
+                        <div id="roadview" style="width:100%; height:200px"></div>
+                        <p></p>
+                        <h3>{{ house.apartmentName }}</h3>
+                        <b-card-text>
+                            <p>{{ house.dongName }} {{ house.buildYear }}</p>
+                            <p>매매가 : {{ house.dealAmount }}</p>
+                        </b-card-text>
+
+                        <b-button href="#" variant="primary">Go somewhere</b-button>
+                    </b-card>
+                </div>
+            </v-col>
+            <v-col>
+                <div id="map"></div>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
 <script>
 // const vueThis = this;
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'KakaoMap',
     components: {},
@@ -30,6 +50,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(["setHouse"]),
         loadScript() {
             const script = document.createElement("script");
             script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=74f1e792cc4d7d72169a67ae909e2b50&libraries=services,clusterer,drawing"
@@ -47,8 +68,8 @@ export default {
             this.map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
         },
 
-            // 마커를 생성하고 지도위에 표시하는 함수입니다
-        addMarker(position, aptName) {
+        // 마커를 생성하고 지도위에 표시하는 함수입니다
+        addMarker(position, aptName, house) {
             // 마커를 생성합니다
             // console.log(position)
             var marker = new window.kakao.maps.Marker({
@@ -66,58 +87,17 @@ export default {
             kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, customOverlay));
             kakao.maps.event.addListener(marker, 'mouseout', this.makeOutListener(customOverlay));
 
-            //클릭 이벤트 등록 : 중심좌표 이동 + 커스텀 오버레이 띄우기
+            //클릭 이벤트 등록 : 중심좌표 이동 + 로드뷰 및 정보 띄우기
             const vueThis = this;
-            var content = '<div class="overlaybox">' +
-                '    <div class="boxtitle">금주 영화순위</div>' +
-                '    <div class="first">' +
-                '        <div class="triangle text">1</div>' +
-                '        <div class="movietitle text">드래곤 길들이기2</div>' +
-                '    </div>' +
-                '    <ul>' +
-                '        <li class="up">' +
-                '            <span class="number">2</span>' +
-                '            <span class="title">명량</span>' +
-                '            <span class="arrow up"></span>' +
-                '            <span class="count">2</span>' +
-                '        </li>' +
-                '        <li>' +
-                '            <span class="number">3</span>' +
-                '            <span class="title">해적(바다로 간 산적)</span>' +
-                '            <span class="arrow up"></span>' +
-                '            <span class="count">6</span>' +
-                '        </li>' +
-                '        <li>' +
-                '            <span class="number">4</span>' +
-                '            <span class="title">해무</span>' +
-                '            <span class="arrow up"></span>' +
-                '            <span class="count">3</span>' +
-                '        </li>' +
-                '        <li>' +
-                '            <span class="number">5</span>' +
-                '            <span class="title">안녕, 헤이즐</span>' +
-                '            <span class="arrow down"></span>' +
-                '            <span class="count">1</span>' +
-                '        </li>' +
-                '    </ul>' +
-                '</div>';
-            const myContent =
-            `
-            <div></div>
-            `;
-            console.log(myContent)
-            const detailOverlay = new kakao.maps.CustomOverlay({
-                position: marker.getPosition(),
-                content: content,
-                xAnchor: 0.3,
-                yAnchor: 0.91
-            });
+            console.log(house)
             kakao.maps.event.addListener(marker, 'click', function() {
                 // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
                 vueThis.selectedMarker = marker;
-                vueThis.map.panTo(marker.getPosition()); //panTo 함수 못찾은거.. this 문제 ㅠㅠ
-                console.log("선택: " + marker.getPosition())
-                detailOverlay.setMap(vueThis.map); //수정!!
+                // 클릭된 집을 현재 집으로 설정합니다. : 그냥 변수에 설정하는 게
+                // this.house = house
+                console.log("in", house)
+                vueThis.setHouse(house);
+                // console.log(marker)
             });
 
             // 생성된 마커를 배열에 추가합니다
@@ -168,7 +148,7 @@ export default {
                 this.sumLng = 0;
                 newHouse.forEach((house) => {
                     // console.log(house)
-                    this.addMarker(new window.kakao.maps.LatLng(house.lat, house.lng), house.apartmentName)
+                    this.addMarker(new window.kakao.maps.LatLng(house.lat, house.lng), house.apartmentName, house)
                 })
                 this.map.setBounds(this.bounds); //지도 영역 재지정
             }
@@ -177,6 +157,20 @@ export default {
             // this.map.panTo()
             console.log(newHouse);
             this.map.panTo(new window.kakao.maps.LatLng(newHouse.lat, newHouse.lng));
+        },
+        selectedMarker: function(){
+            //로드뷰를 해당 아이디 div에 생성합니다
+            var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+            var position = this.selectedMarker.getPosition();
+            console.log("로드뷰 포지션: "+ position) //33.450701, 126.570667
+
+            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+            roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+            });
         }
     }
 };
