@@ -143,11 +143,11 @@
 <br>
 
 ## 2. ERD
-|아파트|회원|
+|아파트|댓글|
 |---|---|
 |![image](https://github.com/ksy00826/HelpMyHome/assets/76732805/b8073add-723b-42e1-9512-f3f8caa51cf0)|![image](https://github.com/ksy00826/HelpMyHome/assets/76732805/3ea7b855-1a92-42c4-a369-d4e11a374884)|
 
-|게시판|댓글|
+|회원|게시판|
 |---|---|
 |![image](https://github.com/ksy00826/HelpMyHome/assets/76732805/97fcb6ce-9100-40e3-9be1-9b1e9fabdf45)|![image](https://github.com/ksy00826/HelpMyHome/assets/76732805/e2c214f9-4406-4580-a11a-f605103bab3c)|
 
